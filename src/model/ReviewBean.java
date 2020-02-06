@@ -4,13 +4,15 @@ public class ReviewBean {
 	
 	private boolean liked;
 	private String review;
-	private GameBean game;
+	private int ID_gioco;
+	private int ID_utente;
 	
 	
-	public ReviewBean(boolean liked, String review, GameBean game) {
+	public ReviewBean(boolean liked, String review, int ID_gioco, int ID_utente) {
 		this.liked = liked;
 		this.review = review;
-		this.game = game;
+		this.ID_gioco = ID_gioco;
+		this.ID_utente = ID_utente;
 	}
 	
 	public boolean getLike() {

@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="js/form_validation.js"></script>
+<script src="js/ajax.js"></script>
 <header>
+
+  <link href="css/header.css" rel="stylesheet">
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <a class="navbar-brand" href="index.jsp"><img class="ml-5" src="gameuppngsfondonero1.png" alt="" width="72" height="72"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,7 +24,7 @@
       </ul>
       <form class="form-inline mt-2 mt-md-0">
         <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
       </form>
     </div>
   </nav>
@@ -40,9 +45,9 @@
             <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
             <h2 id="errorLogin" class="h3 mb-3 font-weight-normal text-danger"></h2>
             <label for="inputEmail" class="sr-only">Email address</label>
-            <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+            <input name="email" type="email" class="form-control" id="email" placeholder="you@example.com" required autofocus>
             <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Password" required>
+            <input name="password" type="password" class="form-control" id="password" placeholder="password" required>
             <div class="checkbox mb-0">
               <label>
                 <input type="checkbox" value="remember-me"/> Remember me
@@ -50,7 +55,7 @@
             </div>
               <a class="mb-3" href="registernow.jsp">Register now</a>
             <button class="btn mt-3 btn-lg btn-primary btn-block" id="loginSubmit" type="button">Sign in</button>
-            <p class="mt-3 mb-3 text-muted">&copy; Game Up 2019</p>
+            <p class="mt-3 mb-3 text-muted">&copy; Game Up 2020</p>
           </form>
         </div>
       </div>

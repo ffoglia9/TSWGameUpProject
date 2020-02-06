@@ -109,7 +109,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">This is a wider card</p>
-                  <button type="button" class="btn btn-primary btn-sm">16,99 &euro;</button>
+                  <button type="button" class="btn btn-primary btn-sm" onclick="openPage('singleproduct.jsp')">16,99 &euro;</button>
                 </div>
               </div>
             </div>
@@ -128,7 +128,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">This is a wider card</p>
-                  <button type="button" class="btn btn-primary btn-sm">16,99 &euro;</button>
+                  <button type="button" class="btn btn-primary btn-sm" onclick="openPage('singleproduct.jsp')">16,99 &euro;</button>
                 </div>
               </div>
             </div>
@@ -150,7 +150,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">This is a wider card</p>
-                  <button type="button" class="btn btn-primary btn-sm">16,99 &euro;</button>
+                  <button type="button" class="btn btn-primary btn-sm" onclick="openPage('singleproduct.jsp')">16,99 &euro;</button>
                 </div>
               </div>
             </div>
@@ -169,7 +169,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">This is a wider card</p>
-                  <button type="button" class="btn btn-primary btn-sm">16,99 &euro;</button>
+                  <button type="button" class="btn btn-primary btn-sm" onclick="openPage('singleproduct.jsp')">16,99 &euro;</button>
                 </div>
               </div>
             </div>
@@ -200,7 +200,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">This is a wider card</p>
-                  <button type="button" class="btn btn-primary btn-sm">17,99 &euro;</button>
+                  <button type="button" class="btn btn-primary btn-sm" onclick="openPage('singleproduct.jsp')">17,99 &euro;</button>
                 </div>
               </div>
             </div>
@@ -219,7 +219,14 @@
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">This is a wider card</p>
-                  <button type="button" class="btn btn-primary btn-sm">16,99 &euro;</button>
+                  <button id = "visitProduct" type="button" class="btn btn-primary btn-sm" onclick="openPage('singleproduct.jsp')">16,99 &euro;</button>
+                  
+                  <script type="text/javascript">
+ 					function openPage(pageURL){
+ 						window.location.href = pageURL;
+ 					}
+					</script>
+					
                 </div>
               </div>
             </div>
@@ -241,7 +248,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">This is a wider card</p>
-                  <button type="button" class="btn btn-primary btn-sm">16,99 &euro;</button>
+                  <button type="button" class="btn btn-primary btn-sm" onclick="openPage('singleproduct.jsp')">16,99 &euro;</button>
                 </div>
               </div>
             </div>
@@ -260,7 +267,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">This is a wider card</p>
-                  <button type="button" class="btn btn-primary btn-sm">16,99 &euro;</button>
+                  <button type="button" class="btn btn-primary btn-sm" onclick="openPage('singleproduct.jsp')">16,99 &euro;</button>
                 </div>
               </div>
             </div>
@@ -286,7 +293,6 @@
     window.jQuery || document.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')
   </script>
   <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/ajax.js"></script>
 </body>
 
 </html>
