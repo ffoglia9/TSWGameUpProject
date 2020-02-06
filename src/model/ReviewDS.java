@@ -1,6 +1,6 @@
 package model;
 
-/*
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,7 +11,7 @@ import java.util.LinkedList;
 import javax.sql.DataSource;
 
 
-
+/*.
 //DataSource del ReviewDS 
 public class ReviewDS implements DataAccessModel<ReviewBean>{
 	
