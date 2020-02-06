@@ -46,10 +46,10 @@
 
 <!-- JSP -->
 <%@ page import = "javax.sql.*" %>
-<%@ page import = "javax.servlet.http.HttpServletRequest " %>
+<%@ page import = "javax.servlet.http.HttpServletRequest" %>
 <%@ page import = "model.GameBean" %>
 <%@ page import = "model.GameDS" %>
-<%@ page import = "javax.sql.DataSource;" %>
+<%@ page import = "javax.sql.DataSource" %>
 <%
 
 	int gameID = Integer.parseInt(request.getParameter("ID"));
