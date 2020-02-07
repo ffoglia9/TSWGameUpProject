@@ -1,0 +1,19 @@
+.sidebar-sticky{
+  background-color: #26201f;
+  border-right-style: solid;
+  border-width: 1px;
+  border-color: #dedddd;
+}
+
+.sidebar a:hover{
+  background-color: #dedddd52;
+}
+
+.flex-column{
+  margin-top: 60px;
+}
+
+
+.sidebar .nav-link{
+  color: #dedddd;
+}
