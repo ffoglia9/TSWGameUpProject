@@ -21,3 +21,9 @@ COMANDI GITHUB:
 
 -) Creare una pull request:
     Tornare sul github del progetto globale (di ffoglia9), "New pull request", "compare across forks", cambiare head repository con la propria fork. Poi creare la pull request.
+
+-) Aggiornare il proprio progetto locale:
+    Da git bash, settare la mia repository come upstream: git remote add upstream https://github.com/ffoglia9/TSWGameUpProject
+    Poi eseguire un rebase: git rebase upstream/master
+    Ed infine aggiornare la propria repository remota: git push
+    Poi potete iniziare a modificare il progetto. Fatelo prima di fare qualsiasi modifica, altrimenti potreste causare un merge conflict.
