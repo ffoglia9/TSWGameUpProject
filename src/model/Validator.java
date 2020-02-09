@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 import javax.sql.DataSource;
 
-import model.UserDAM.NonExistentAccountException;
+import model.UserDS.NonExistentAccountException;
 
 public class Validator {
 	private static final Map<String, Pattern> idToRegex;
@@ -34,7 +34,7 @@ public class Validator {
 	static public boolean isPresentEmail(String email, DataSource ds) {
 		
 		
-		UserDAM userDB = new UserDAM(ds);
+		UserDS userDB = new UserDS(ds);
 		try {
 			if(userDB.doRetrieveByEmail(email) != null) {
 				return false;
@@ -52,7 +52,7 @@ public class Validator {
 	static public boolean isPresentUsername(String username, DataSource ds) {
 		
 		
-		UserDAM userDB = new UserDAM(ds);
+		UserDS userDB = new UserDS(ds);
 		try {
 			if(userDB.doRetrieveByUsername(username) != null) {
 				return false;

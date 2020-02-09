@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import javax.sql.DataSource;
+import model.DataAccessModel;
 
 /* DataSource del bean UserBean. */
 public class UserDS implements DataAccessModel<UserBean> {
@@ -21,10 +22,19 @@ public class UserDS implements DataAccessModel<UserBean> {
 		System.out.println("DataSource UserDS creation....");
 	}
 
-	public synchronized UserBean doRetrieveByEmailAndPassword(String email, String password) throws SQLException, NonexistentAccountException, WrongPasswordException { //
+	public synchronized UserBean doRetrieveByEmailAndPassword(String email, String password) throws SQLException, NonExistentAccountException, WrongPasswordException {
+		UserBean ubResult = doRetrieveByEmail(email);
+		String ubPw = ubResult.getPassword();
+		if(ubPw.equals(password)) {
+			return ubResult;
+		} else {
+			throw new WrongPasswordException();
+		}
+	}
+	
+	public synchronized UserBean doRetrieveByEmail(String email) throws SQLException, NonExistentAccountException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		UserBean bean = null;
 		String findByEmail = "SELECT * FROM " + UserDS.TABLE_NAME + " WHERE Email = ?";
 		try {
 			connection = ds.getConnection();
@@ -32,20 +42,16 @@ public class UserDS implements DataAccessModel<UserBean> {
 			preparedStatement.setString(1, email);
 			
 			ResultSet rs = preparedStatement.executeQuery();
-			if (rs.next()) { // Dovrebbe essere un unico result
-				String emailPw = rs.getString("Password");
-				if(emailPw.equals(password)) {
-					bean = new UserBean();
-					bean.setUserID(rs.getInt("ID_Utente"));
-					bean.setUsername(rs.getString("Username"));
-					bean.setPassword(rs.getString("Password"));
-					bean.setUserTypeID(rs.getString("Tipo_Utente"));
-					bean.setEmail(rs.getString("Email"));
-				} else {
-					throw new WrongPasswordException();
-				}
+			if(rs.next()) {
+				UserBean bean = new UserBean();
+				bean.setUserID(rs.getInt("ID_Utente"));
+				bean.setUsername(rs.getString("Username"));
+				bean.setPassword(rs.getString("Password"));
+				bean.setUserTypeID(rs.getString("Tipo_Utente"));
+				bean.setEmail(email);
+				return bean;
 			} else {
-				throw new NonexistentAccountException();
+				throw new NonExistentAccountException();
 			}
 		} finally  {
 			try {
@@ -56,7 +62,39 @@ public class UserDS implements DataAccessModel<UserBean> {
 					connection.close();
 			}
 		}
-		return bean;
+	}
+	
+	//Ricerca per username
+	public synchronized UserBean doRetrieveByUsername(String username) throws SQLException, NonExistentAccountException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		String findByEmail = "SELECT * FROM " + UserDS.TABLE_NAME + " WHERE Username = ?";
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(findByEmail);
+			preparedStatement.setString(1, username);
+			
+			ResultSet rs = preparedStatement.executeQuery();
+			if(rs.next()) {
+				UserBean bean = new UserBean();
+				bean.setUserID(rs.getInt("ID_Utente"));
+				bean.setUsername(username);
+				bean.setPassword(rs.getString("Password"));
+				bean.setUserTypeID(rs.getString("Tipo_Utente"));
+				bean.setEmail(rs.getString("Email"));
+				return bean;
+			} else {
+				throw new NonExistentAccountException();
+			}
+		} finally  {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
 	}
 	
 	@Override
@@ -77,7 +115,6 @@ public class UserDS implements DataAccessModel<UserBean> {
 
 			preparedStatement.executeUpdate();
 
-			connection.commit();
 		} finally {
 			try {
 				if (preparedStatement != null)
@@ -215,7 +252,6 @@ public class UserDS implements DataAccessModel<UserBean> {
 
 			result = preparedStatement.executeUpdate();
 
-			connection.commit();
 		} finally {
 			try {
 				if (preparedStatement != null)
@@ -229,10 +265,10 @@ public class UserDS implements DataAccessModel<UserBean> {
 	}
 	
 	/// Exceptions used by this DataSource
-	public class NonexistentAccountException extends Exception {
+	public class NonExistentAccountException extends Exception {
 
 		private static final long serialVersionUID = 1L;
-		public NonexistentAccountException() {
+		public NonExistentAccountException() {
 			super("Nessun account trovato nel database associato all'email fornita");
 		}
 	}

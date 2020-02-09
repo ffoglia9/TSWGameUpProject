@@ -13,7 +13,7 @@ import javax.sql.DataSource;
 
 import model.UserBean;
 import model.UserDS;
-import model.UserDS.NonexistentAccountException;
+import model.UserDS.NonExistentAccountException;
 import model.UserDS.WrongPasswordException;
 
 @WebServlet("/SignIn")
@@ -41,7 +41,7 @@ public class SignIn extends HttpServlet {
 		} catch (SQLException e) {
 			System.out.println("Error:" + e.getMessage());
 			response.sendError(500);
-		} catch (NonexistentAccountException e) {
+		} catch (NonExistentAccountException e) {
 			response.sendError(432); // "Account non trovato"
 		} catch (WrongPasswordException e) {
 			response.sendError(433); // "Password errata"

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import model.UserBean;
-import model.UserDAM;
+import model.UserDS;
 import model.Validator;
 
 @WebServlet("/Register")
@@ -43,7 +43,7 @@ public class Register extends HttpServlet {
 			return;
 		}
 		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
-		UserDAM userDB = new UserDAM(ds);
+		UserDS userDB = new UserDS(ds);
 		try {
 			userDB.doSave(user);
 		} catch (SQLException e) {
