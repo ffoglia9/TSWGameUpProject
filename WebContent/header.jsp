@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page import = "model.UserBean" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="js/form_validation.js"></script>
 <script src="js/ajax.js"></script>
 <header>
 
-  <link href="css/header.css" rel="stylesheet">
+  <!-- <link href="css/header.css" rel="stylesheet"> -->
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <a class="navbar-brand" href="index.jsp"><img class="ml-5" src="gameuppngsfondonero1.png" alt="" width="72" height="72"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,7 +17,14 @@
           <a class="nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item" >
-          <a class="nav-link" data-toggle="modal" data-target="#exampleModalCenter" href="/">Login</a>
+          <%
+          	UserBean ub = (UserBean) request.getSession().getAttribute("userBean");
+          	if(ub != null) {
+          %>
+          	<%= ub.getUsername() %>
+          <% } else { %>
+          	<a class="nav-link" data-toggle="modal" data-target="#exampleModalCenter" href="/">Login</a>
+          <% } %>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Pubblica il tuo gioco <span class="sr-only">(current)</span> </a>

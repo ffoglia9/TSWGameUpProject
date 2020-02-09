@@ -24,24 +24,29 @@ public class SignIn extends HttpServlet {
 	protected void doPost(HttpServletRequest request, 
 			HttpServletResponse response) throws ServletException, IOException {
 		
-		String email = request.getParameter("inputEmail");
-		String pw = request.getParameter("inputPassword");
+		String email = request.getParameter("email");
+		String pw = request.getParameter("password");
 		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
 		UserDS userDS = new UserDS(ds);
 		PrintWriter writer = response.getWriter();
+		response.setContentType("text/plain"); // fixa l'errore nella console di firefox
 		System.out.println("SignIn evocato con dati " + email + " e " + pw);
 		try {
 			UserBean user = userDS.doRetrieveByEmailAndPassword(email, pw);
 			if(user != null) { 
 				request.getSession().setAttribute("userBean", user);
 				writer.println("User bean settato");
+				response.setStatus(HttpServletResponse.SC_OK);
 			}
 		} catch (SQLException e) {
 			System.out.println("Error:" + e.getMessage());
+			response.sendError(500);
 		} catch (NonexistentAccountException e) {
-			writer.println("Account non trovato");
+			response.sendError(432); // "Account non trovato"
 		} catch (WrongPasswordException e) {
-			writer.println("Password errata");
+			response.sendError(433); // "Password errata"
+		} finally {
+			writer.close();
 		}
 		
 	}
