@@ -22,6 +22,9 @@ public class UserDS implements DataAccessModel<UserBean> {
 		System.out.println("DataSource UserDS creation....");
 	}
 
+	// Metodo per ottenere un userBean da email e password, usato per il signin.
+	// In particolare, doRetrieveByEmail va chiamato prima di un eventuale confronto con la password, poiché questo metodo viene usato anche
+	// per controllare l'esistenza della email durante la validazione lato client dell'email durante il signin tramite ajax.
 	public synchronized UserBean doRetrieveByEmailAndPassword(String email, String password) throws SQLException, NonExistentAccountException, WrongPasswordException {
 		UserBean ubResult = doRetrieveByEmail(email);
 		String ubPw = ubResult.getPassword();

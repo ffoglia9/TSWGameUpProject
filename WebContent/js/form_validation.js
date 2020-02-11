@@ -21,7 +21,8 @@ errorMsgs = new Object(); // Messaggi di errore per la validazione degli input, 
 
 errorMsgs.email = {
 	"invalid" : "Il campo deve contenere una mail valida (you@example.com)",
-	"server" : "L'email è già stata usata!"
+	"alreadyExisting" : "L'email è già stata usata!",
+	"noEmailExisting" : "Non esiste un account associato a questa email."
 };
 errorMsgs.firstName = {
 	"invalid" : "Il nome deve contenere solo lettere."
@@ -31,7 +32,7 @@ errorMsgs.lastName = {
 };
 errorMsgs.username = {
 	"invalid" : "L'username può contenere lettere, numeri, trattini (-) e underscore (_).",
-	"server" : "L'username è già in uso!"
+	"alreadyExisting" : "L'username è già in uso!"
 };
 errorMsgs.password = {
 	"invalid" : "La password deve essere di almeno 8 caratteri."
@@ -64,36 +65,34 @@ regexes.cap = /^\d{5}$/; // Solo 5 numeri
 
 Validations.regs.regex = regexes;
 
-// Funzioni speciali di controllo, id = funzione associata (definite alla fine del file)
-specialBehaviours = new Object();
-
-specialBehaviours.email = emailPresent;
-specialBehaviours.username = usernamePresent;
-
-Validations.specialBehaviour = specialBehaviours;
+// Funzioni speciali di controllo, comboid = funzione associata (definite negli script js dedicati ai singoli form).
+// comboid = id form + id input
+Validations.specialBehaviour = new Object();
 
 // Funzioni di validazione, validano l'input tramite l'uso di regex e settano il DOM tramite jquery
-Validations.validate = function(jQueryObj) {
-	var id = jQueryObj.attr("id");
-	console.log("timeout running " + Validations.timeoutIDs[id]);
-	Validations.timeoutIDs[id] = null;
+Validations.validate = function(jQueryObj) { // Prende un oggetto jquery come input, deve essere un input di un form
+	var inputID = jQueryObj.attr("id");
+	var comboID = jQueryObj.closest("form").attr("id") + inputID;
+	console.log("timeout running " + Validations.timeoutIDs[comboID]);
+	Validations.timeoutIDs[comboID] = null;
 	if(!(jQueryObj.val()) && jQueryObj.attr("required")) { // Il campo è required ma l'utente non lo ha compilato, segna come invalido e termina la funzione
 		jQueryObj.removeClass("is-valid").addClass("is-invalid");
 		jQueryObj.closest("div").find(".invalid-feedback").text(Validations.errorMessages.defaultMsg["invalid"]);
 		return
 	}
-	if(!Validations.regs.regex[id]) { // Nessuna regex associata all'input, quindi non va validato
+	if(!Validations.regs.regex[inputID]) { // Nessuna regex associata all'input, quindi non va validato
 		return
 	}
-	Validations.timeoutIDs[id] = null;
-	var success = Validations.regs.validate(jQueryObj.val(), Validations.regs.regex[id]); // Validazione lato client della sintassi dell'input tramite regex
-	console.log("validating" + Validations.regs.regex[id] + ": " +success);
+	Validations.timeoutIDs[comboID] = null;
+	var success = Validations.regs.validate(jQueryObj.val(), Validations.regs.regex[inputID]); // Validazione lato client della sintassi dell'input tramite regex
+	console.log("validating" + Validations.regs.regex[inputID] + ": " +success);
 	if(!success) {
-		jQueryObj.closest("div").find(".invalid-feedback").text(Validations.errorMessages[id]["invalid"]); // Trova il div parente dell'oggetto input. Trova un elemento con la classe invalid-feedback all'interno. 
+		jQueryObj.closest("div").find(".invalid-feedback").text(Validations.errorMessages[inputID]["invalid"]); // Trova il div parente dell'oggetto input. Trova un elemento con la classe invalid-feedback all'interno. 
 	}
-
-	if(success && Validations.specialBehaviour[id]) {
-		success = Validations.specialBehaviour[id](jQueryObj); // Ulteriore validazione (es. controllo della presenza dell'email nel DB lato server
+	console.log(comboID);
+	if(success && Validations.specialBehaviour[comboID]) {
+		console.log("specialBehaviour con comboID "+comboID+" esiste");
+		success = Validations.specialBehaviour[comboID](jQueryObj); // Ulteriore validazione (es. controllo della presenza dell'email nel DB lato server
 	}
 	if(success) {
 		jQueryObj.removeClass("is-invalid").addClass("is-valid");
@@ -103,9 +102,9 @@ Validations.validate = function(jQueryObj) {
 }
 
 Validations.timeoutIDs = new Object();
-$("#registerForm :input").keyup(function(data) { // Valida l'input 1 secondo dopo che l'utente ha smesso di digitare del testo.
+$("form :input").keyup(function(data) { // Valida l'input 1 secondo dopo che l'utente ha smesso di digitare del testo.
 	var thisObj = $(this);
-	var thisID = thisObj.attr("id");
+	var thisID = thisObj.closest("form").attr("id") + thisObj.attr("id"); // genera un id univoco creato dalla combo id form + id input
 	console.log("calling!");
 	if(Validations.timeoutIDs[thisID] != null && Validations.timeoutIDs[thisID] != undefined) {
 		console.log("being deleted " + Validations.timeoutIDs[thisID]);
@@ -115,49 +114,11 @@ $("#registerForm :input").keyup(function(data) { // Valida l'input 1 secondo dop
 	Validations.timeoutIDs[thisID] = setTimeout(Validations.validate, 1000, thisObj); // Un secondo di pausa da parte dell'utente causa l'esecuzione della validazione.
 });
 
-$("#registerForm").submit(function(e) {
-	$("#registerForm :input").each(function() {
+$("form").submit(function(e) {
+	$(this).find(":input").each(function() {
 		Validations.validate($(this));
 		if($(this).hasClass("is-invalid")) { // Se uno degli input è invalido, la richiesta non viene mandata
 			e.preventDefault();
 		}
 	})
 });
-
-// Funzioni speciali di controllo, usate per validazioni ulteriori
-function emailPresent(jQueryObj) {
-	var returnVal = false;
-	var httpObj = $.ajax({
-			url: "Register", 
-			type: "GET",
-			data: {"email" : jQueryObj.val()},
-			async: false,
-			statusCode: {
-				200: function() {returnVal = true},
-				420: function(jqXHR, textStatus, errorThrown) {
-					console.log(textStatus);
-					jQueryObj.closest("div").find(".invalid-feedback").text(Validations.errorMessages["email"]["server"]);
-				}
-			}
-	});
-	return returnVal;
-}
-
-function usernamePresent(jQueryObj){
-	var returnVal = false;
-	$.ajax({
-		url: "Register",
-		type: "GET",
-		data: {"username" : jQueryObj.val()},
-		async: false,
-		statusCode: {
-			200: function() {returnVal = true},
-			420: function(jqXHR, textStatus, errorThrown){
-				console.log(textStatus);
-				jQueryObj.closest("div").find(".invalid-feedback").text(Validations.errorMessages["username"]["server"]);
-			}
-		}
-	});
-	
-	return returnVal;
-}

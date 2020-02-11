@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ page import = "model.UserBean" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="js/form_validation.js"></script>
-<script src="js/ajax.js"></script>
+<link href="css/signin.css" rel="stylesheet">
 <header>
 
   <!-- <link href="css/header.css" rel="stylesheet"> -->
@@ -52,10 +51,16 @@
             <img class="mb-4" src="..." alt="" width="72" height="72">
             <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
             <h2 id="errorLogin" class="h3 mb-3 font-weight-normal text-danger"></h2>
-            <label for="inputEmail" class="sr-only">Email address</label>
-            <input name="email" type="email" class="form-control" id="email" placeholder="you@example.com" required autofocus>
-            <label for="inputPassword" class="sr-only">Password</label>
-            <input name="password" type="password" class="form-control" id="password" placeholder="password" required>
+            <div>
+            	<label for="email" class="sr-only">Email address</label>
+	            <input name="email" type="email" class="form-control" id="email" placeholder="you@example.com" required autofocus>
+	            <div class="invalid-feedback"></div>
+	        </div>
+	        <div>
+	            <label for="password" class="sr-only">Password</label>
+	            <input name="password" type="password" class="form-control" id="password" placeholder="password" required>
+	            <div class="invalid-feedback"></div>
+            </div>
             <div class="checkbox mb-0">
               <label>
                 <input type="checkbox" value="remember-me"/> Remember me

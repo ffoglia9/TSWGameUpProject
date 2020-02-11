@@ -115,5 +115,7 @@
     </script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/form_validation.js"></script>
+    <script src="js/register_validation.js"></script>
+    <script src="js/signin_validation.js"></script>
 </body>
 </html>
