@@ -38,7 +38,7 @@ public class Cart {
 		return tot;
 	}
 	
-	public List<GameBean> getgames() {
-		return  games;
+	public int getAmountOfGames() {
+		return games.size();
 	}
 }

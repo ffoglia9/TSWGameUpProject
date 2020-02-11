@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ page import = "model.UserBean" %>
+<%@ page import = "model.Cart" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link href="css/signin.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <header>
 
   <!-- <link href="css/header.css" rel="stylesheet"> -->
@@ -13,22 +15,35 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="index.jsp">Home</a>
         </li>
-        <li class="nav-item" >
+        <li class="nav-item">
           <%
           	UserBean ub = (UserBean) request.getSession().getAttribute("userBean");
           	if(ub != null) {
           %>
-          	<%= ub.getUsername() %>
+          	<span class="navbar-text"><%= ub.getUsername() %></span>
           <% } else { %>
           	<a class="nav-link" data-toggle="modal" data-target="#exampleModalCenter" href="/">Login</a>
           <% } %>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Pubblica il tuo gioco <span class="sr-only">(current)</span> </a>
+          <a class="nav-link" href="#">Pubblica il tuo gioco</a>
         </li>
       </ul>
+      <a href="checkout.jsp" class="nav-link">
+		<i class="fa fa-shopping-cart"></i>
+			<sup><span class="badge badge-pill badge-danger">
+			<%
+				Cart shoppingCart = (Cart) request.getSession().getAttribute("ShoppingCart");
+				if(shoppingCart != null) {
+			%>
+			<%= shoppingCart.getAmountOfGames() %>
+			<% } else { %>
+			0
+			<% } %>
+			</span></sup>
+ 	  </a>
       <form class="form-inline mt-2 mt-md-0">
         <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
