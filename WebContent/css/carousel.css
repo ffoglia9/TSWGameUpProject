@@ -3,7 +3,7 @@
 /* Padding below the footer and lighter body text */
 body {
   padding-top: 3rem;
-  padding-bottom: 3rem;
+  padding-bottom: 0rem;
   color: #5a5a5a;
   background-color: #26201f;
 }
@@ -20,23 +20,36 @@ body {
   color: #dedddd;
 }
 .card {
-  background-color: #26201f;
+  background-color: #393535;
   border-color: #26201f;
 }
 
+
 .card-title {
+  font-size: 2.5rem;
   color: #cfcdcd;
   margin-bottom: 0.25rem;
 }
 
 .card-text {
+	
+  font-size: 1rem;
   color: #959291;
+}
+
+.card-img {
+  width: 130px;
+  height: 130px;
+  display: block;
+  float: right;
 }
 
 .btn {
   border-radius: 27px 27px 27px 27px;
   background-color: #f0f0f6;
+  
 }
+
 
 .btn-primary {
   color: #3686f7;
@@ -56,19 +69,33 @@ body {
   size: 1px;
 }
 
-.card-img {
-  width: 100px;
-  height: 100px;
-  display: block;
-  float: right;
+
+
+a{
+	color:#ffffff;
 }
+
 
 @media (max-width: 768px) {
   .card-img{
     display: block;
     float: left;
-    margin-left: 1.25rem;
+    width:100px;
+    height: 100px;
+    margin-left: 0.90rem;
   }
+  
+  .card{
+  	padding-right: 1rem;
+  	padding-left: 1rem;
+  }
+  
+	.ml-5{
+ 		margin-left: 0rem !important;
+ 	}
+  
+
+  
 }
 
 

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="it">
 
 <head>
   <meta charset="utf-8">
@@ -29,6 +29,8 @@
   </style>
   <!-- Custom styles for this template -->
   <link href="css/carousel.css" rel="stylesheet">
+    <link href="css/footer.css" rel="stylesheet">
+  
 </head>
 
 <body>
@@ -96,83 +98,22 @@
       <p class="h1 text-left mb-4">Offerte del giorno</p>
       <div class="row">
         <div class="col">
-          <div class="card mb-3" style="max-width: 540px;">
-            <div class="row no-gutters">
-              <div class="col-md-4 " style="
-      margin-top: auto;
-      margin-bottom: auto;
-  ">
-                <img src="img1.jpg" class="card-img align-middle" alt="..." >
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a wider card</p>
-                  <button type="button" class="btn btn-primary btn-sm" onclick="openPage('singleproduct.jsp')">16,99 &euro;</button>
-                </div>
-              </div>
-            </div>
-          </div>
+  <%@ include file="product_card.jsp"%>
         </div>
         <div class="col">
-          <div class="card mb-3" style="max-width: 540px;">
-            <div class="row no-gutters">
-              <div class="col-md-4 " style="
-      margin-top: auto;
-      margin-bottom: auto;
-  ">
-                <img src="img1.jpg" class="card-img align-middle" alt="..." >
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a wider card</p>
-                  <button type="button" class="btn btn-primary btn-sm" onclick="openPage('singleproduct.jsp')">16,99 &euro;</button>
-                </div>
-              </div>
-            </div>
-          </div>
+        <%@ include file="product_card.jsp"%>
+
         </div>
       </div>
 
       <div class="row">
         <div class="col">
-          <div class="card mb-3" style="max-width: 540px;">
-            <div class="row no-gutters">
-              <div class="col-md-4 " style="
-      margin-top: auto;
-      margin-bottom: auto;
-  ">
-                <img src="img1.jpg" class="card-img align-middle" alt="..." >
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a wider card</p>
-                  <button type="button" class="btn btn-primary btn-sm" onclick="openPage('singleproduct.jsp')">16,99 &euro;</button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <%@ include file="product_card.jsp"%>
+
         </div>
         <div class="col">
-          <div class="card mb-3" style="max-width: 540px;">
-            <div class="row no-gutters">
-              <div class="col-md-4 " style="
-      margin-top: auto;
-      margin-bottom: auto;
-  ">
-                <img src="img1.jpg" class="card-img align-middle" alt="..." >
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a wider card</p>
-                  <button type="button" class="btn btn-primary btn-sm" onclick="openPage('singleproduct.jsp')">16,99 &euro;</button>
-                </div>
-              </div>
-            </div>
-          </div>
+            <%@ include file="product_card.jsp"%>
+
         </div>
       </div>
     </div>
@@ -187,90 +128,23 @@
       <p class="h1 text-left mb-4">Giochi che adoriamo</p>
       <div class="row">
         <div class="col">
-          <div class="card mb-3" style="max-width: 540px;">
-            <div class="row no-gutters">
-              <div class="col-md-4 " style="
-      margin-top: auto;
-      margin-bottom: auto;
-  ">
-                <img src="img1.jpg" class="card-img align-middle " alt="...">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a wider card</p>
-                  <button type="button" class="btn btn-primary btn-sm" onclick="openPage('singleproduct.jsp')">17,99 &euro;</button>
-                </div>
-              </div>
-            </div>
-          </div>
+            <%@ include file="product_card.jsp"%>
+
         </div>
         <div class="col">
-          <div class="card mb-3" style="max-width: 540px;">
-            <div class="row no-gutters">
-              <div class="col-md-4 " style="
-      margin-top: auto;
-      margin-bottom: auto;
-  ">
-                <img src="img1.jpg" class="card-img align-middle" alt="..." >
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a wider card</p>
-                  <button id = "visitProduct" type="button" class="btn btn-primary btn-sm" onclick="openPage('singleproduct.jsp')">16,99 &euro;</button>
-                  
-                  <script type="text/javascript">
- 					function openPage(pageURL){
- 						window.location.href = pageURL;
- 					}
-					</script>
-					
-                </div>
-              </div>
-            </div>
-          </div>
+         <%@ include file="product_card.jsp"%>
+
         </div>
       </div>
 
       <div class="row">
         <div class="col">
-          <div class="card mb-3" style="max-width: 540px;">
-            <div class="row no-gutters">
-              <div class="col-md-4 " style="
-      margin-top: auto;
-      margin-bottom: auto;
-  ">
-                <img src="img1.jpg" class="card-img align-middle" alt="...">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a wider card</p>
-                  <button type="button" class="btn btn-primary btn-sm" onclick="openPage('singleproduct.jsp')">16,99 &euro;</button>
-                </div>
-              </div>
-            </div>
-          </div>
+           <%@ include file="product_card.jsp"%>
+
         </div>
         <div class="col">
-          <div class="card mb-3" style="max-width: 540px;">
-            <div class="row no-gutters">
-              <div class="col-md-4 " style="
-      margin-top: auto;
-      margin-bottom: auto;
-  ">
-                <img src="img1.jpg" class="card-img align-middle" alt="...">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a wider card</p>
-                  <button type="button" class="btn btn-primary btn-sm" onclick="openPage('singleproduct.jsp')">16,99 &euro;</button>
-                </div>
-              </div>
-            </div>
-          </div>
+            <%@ include file="product_card.jsp"%>
+
         </div>
       </div>
     </div>
@@ -282,18 +156,14 @@
 
 
     <!-- FOOTER -->
-    <footer class="container">
-      <p class="float-right"><a href="#">Back to top</a></p>
-      <p>&copy; 2019 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-    </footer>
+	<%@ include file="footer.jsp"%>
+	
+ 
+
   </main>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script>
-    window.jQuery || document.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')
-  </script>
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/form_validation.js"></script>
-  <script src="js/signin_validation.js"></script>
+
 </body>
+
+
 
 </html>
