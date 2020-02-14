@@ -8,7 +8,7 @@
 <header>
 
   
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <nav class="navbar navbar-expand-md navbar-dark navbar-fixed-top bg-dark">
     <a class="navbar-brand" href="index.jsp"><img class="ml-5" src="gameuppngsfondonero1.png" alt="" width="72" height="72"></a> 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
