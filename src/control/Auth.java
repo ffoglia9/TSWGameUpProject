@@ -20,7 +20,7 @@ import model.UserBean.tipoUtente;
 /**
  * Servlet Filter implementation class Auth
  */
-@WebFilter("/checkout.jsp") // Aggiungere pannello utente
+@WebFilter(urlPatterns = {"/checkout.jsp", "/pannello_utente.jsp"}) // Aggiungere pannello utente
 public class Auth implements Filter {
 	HashMap<String, tipoUtente> permissionsMap;
     /**
@@ -29,6 +29,7 @@ public class Auth implements Filter {
     public Auth() {
         permissionsMap = new HashMap<>();
         permissionsMap.put("/checkout.jsp", tipoUtente.User);
+        permissionsMap.put("/pannello_utente.jsp", tipoUtente.User);
     }
 
 	/**
@@ -59,7 +60,6 @@ public class Auth implements Filter {
 		}
 		
 		String servletName = rq.getServletPath();
-		System.out.println(servletName);
 		tipoUtente userTypeRequired = permissionsMap.get(servletName);
 		if(userTypeRequired != null) {
 			int userTypeRequiredID = Integer.parseInt(UserBean.getUserTypeValue(userTypeRequired));

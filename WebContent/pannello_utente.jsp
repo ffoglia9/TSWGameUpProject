@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="generator" content="Jekyll v3.8.6">
-    <title>GameUp - Admin Pannel</title>
+    <title>GameUp - User panel</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -41,72 +41,76 @@
       }
     </style>
     <!-- Custom styles for this template -->
-    <link href="css/admin.css" rel="stylesheet">
+    <link href="css/sidebar.css" rel="stylesheet">
     <link href="css/carousel.css" rel="stylesheet">
 
 
 
     <!--TO-DO: IMPORTARE HEADER-->
-
+    <%@ include file="header.jsp"%>
+    <%@ page import = "model.UserBean" %>
+    <%@ page import = "model.UserBean.tipoUtente" %>
 
   </head>
+  
+  
   <body>
+  
 
 <div class="container-fluid">
   <div class="row">
-    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+    <nav class="col-md-2 d-none d-md-block sidebar">
       <div class="sidebar-sticky" >
         <ul class="nav flex-column">
           <li class="nav-item">
             <a class="nav-link active" href="#">
-              <i class="fa fa-sm fa-home"></i>
-              Dashboard <span class="sr-only">(current)</span>
+              <i class="fa fa-sm fa-address-card"></i>
+              Info account
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <i class="fa fa-sm fa-file"></i>
-              Elenco Ordini
+              Lista acquisti
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <i class="fa fa-sm fa-shopping-cart"></i>
-              Products
+              Carrello
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="checkout.html">
-              <i class="fa fa-sm fa-user"></i>
-              Customers
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="fa fa-sm fa-bar-chart"></i>
-              Reports
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="fa fa-sm fa-money"></i>
-              Sponsorizza la tua app
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="fa fa-sm fa-address-card"></i>
-              Il mio account
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="fa fa-sm fa-file"></i>
-              I miei acquisti
-            </a>
-          </li>
+          <% 
+          	UserBean uBean = (UserBean) request.getSession().getAttribute("userBean");
+          	tipoUtente userType = uBean.getUserType();
+          	if(userType == tipoUtente.Admin) {
+          %>
+	          <li class="nav-item">
+	            <a class="nav-link" href="checkout.html">
+	              <i class="fa fa-sm fa-user"></i>
+	              Lista utenti
+	            </a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link" href="#">
+	              <i class="fa fa-sm fa-bar-chart"></i>
+	              Giochi da approvare
+	            </a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link" href="#">
+	              <i class="fa fa-sm fa-money"></i>
+	              Sponsorizzazioni in attesa
+	            </a>
+	          </li>
+	      <% } else if(userType == tipoUtente.Developer) { %>
+	          <li class="nav-item">
+	            <a class="nav-link" href="#">
+	              <i class="fa fa-sm fa-home"></i>
+	              Le mie app
+	            </a>
+	          </li>
+	      <% } %>
         </ul>
       </div>
     </nav>

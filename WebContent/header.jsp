@@ -19,16 +19,6 @@
           <a class="nav-link" href="index.jsp">Home</a>
         </li>
         <li class="nav-item">
-          <%
-          	UserBean ub = (UserBean) request.getSession().getAttribute("userBean");
-          	if(ub != null) {
-          %>
-          	<span class="navbar-text"><%= ub.getUsername() %></span>
-          <% } else { %>
-          	<a class="nav-link" data-toggle="modal" data-target="#exampleModalCenter" href="/">Login</a>
-          <% } %>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" href="#">Pubblica il tuo gioco</a>
         </li>
       </ul>
@@ -54,9 +44,17 @@
             <img src="http://placehold.it/32x32" class="rounded-circle z-depth-0" alt="avatar image">
           </a>
           <div class="dropdown-menu dropdown-menu-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-5">
-            <a class="dropdown-item" href="#">Login</a>
-            <a class="dropdown-item" href="#">Registrati</a>
-            <a class="dropdown-item" href="#">Something else here</a>
+          	<%
+          		UserBean ub = (UserBean) request.getSession().getAttribute("userBean");
+          		if(ub != null) {
+         	%>
+         		<span class="dropdown-item"><%= ub.getUsername() %></span>
+         		<a class="dropdown-item" href="./pannello_utente.jsp">Pannello utente</a>
+         		<a class="dropdown-item" href="" onclick="logout()" >Logout</a>
+         	<% } else { %>
+	            <a class="dropdown-item" data-toggle="modal" data-target="#exampleModalCenter" href="/">Login</a>
+	            <a class="dropdown-item" href="./registernow.jsp">Registrati</a>
+	        <% } %>
           </div>
         </li>
         <li>

@@ -24,6 +24,7 @@ $("#loginSubmit").click(function() {
 	$.ajax({
 		type: "POST",
 		url: "SignIn",
+		async: false,
 		data: $("#loginForm").serialize(),
 		success: function(data) {
 			$("#errorLogin").text(data);
@@ -40,6 +41,7 @@ $("#loginSubmit").click(function() {
 			},
 		}
 	});
+	location.reload(true);
 })
 
 Validations.specialBehaviour["loginFormemail"] = emailNotPresent;
