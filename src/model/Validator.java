@@ -11,7 +11,7 @@ import javax.sql.DataSource;
 
 import model.UserDS.NonExistentAccountException;
 
-public class Validator {
+abstract public class Validator {
 	private static final Map<String, Pattern> idToRegex;
 	
 	static {

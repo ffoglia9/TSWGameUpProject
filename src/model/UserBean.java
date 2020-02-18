@@ -64,6 +64,9 @@ public class UserBean {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	
+	// User Type ID: Stringhe contenenti un numero, l'ordine conta (minimo: utente normale, massimo: admin). Castate a integer nel filter auth
 	/**
 	 * @return the userType ID (string)
 	 */
@@ -78,6 +81,19 @@ public class UserBean {
 			default:
 				return "0";
 		}
+	}
+	
+	static public String getUserTypeValue(tipoUtente t) {
+		switch(t) {
+			case User:
+				return "0";
+			case Developer:
+				return "1";
+			case Admin:
+				return "2";
+			default:
+				return "0";
+	}
 	}
 	/**
 	 * @param userTypeID the userTypeID associated to the enum value to set
@@ -97,6 +113,10 @@ public class UserBean {
 				this.userType = tipoUtente.User;
 				break;
 		}
+	}
+	
+	public tipoUtente getUserType() {
+		return this.userType;
 	}
 	/**
 	 * @return the password

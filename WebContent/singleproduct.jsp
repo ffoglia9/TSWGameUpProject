@@ -89,8 +89,8 @@
 		                    <hr>
 		                    <h5>Vota</h5>
 		                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
-		                    <button class="btn btn-primary btn-sm"> <i class="fa fa-lg fa-thumbs-o-up">Mi piace</i> </button>
-		                    <button class="btn btn-primary btn-sm"> <i class="fa fa-lg  fa-thumbs-o-down">Non mi piace</i> </button>
+		                    <button class="btn btn-primary btn-sm"> <i class="fa fa-lg fa-thumbs-o-up"></i> Mi piace </button>
+		                    <button class="btn btn-primary btn-sm"> <i class="fa fa-lg  fa-thumbs-o-down"></i> Non mi piace </button>
 		                    <!-- TODO aggiungere al button la chiamata ad un metodo che setta il campo liked (ReviewBean) su T/F  -->
 		
 		                </div>
