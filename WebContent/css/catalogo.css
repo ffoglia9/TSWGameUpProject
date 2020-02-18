@@ -36,6 +36,10 @@
   background-color: #dedddd52;
 }
 
+.btnn {
+  color:#dedddd !important;
+}
+
 @media (min-width: 768px) {
   #sidebar-wrapper {
     margin-left: 0;
