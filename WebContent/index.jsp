@@ -5,11 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>GAME UP </title>
-
-
-  <!-- Bootstrap core CSS -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-
+  <%@ include file="header.jsp"%>
 
   <style>
     .bd-placeholder-img {
@@ -29,12 +25,10 @@
   </style>
   <!-- Custom styles for this template -->
   <link href="css/carousel.css" rel="stylesheet">
-    <link href="css/footer.css" rel="stylesheet">
   
 </head>
 
 <body>
-  <%@ include file="header.jsp"%>
 
   <main role="main">
     <div id="myCarousel" class="carousel slide" data-ride="carousel">

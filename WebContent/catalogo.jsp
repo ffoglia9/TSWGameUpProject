@@ -9,21 +9,16 @@
   <meta name="author" content="">
 
   <title>Catalogo giochi - Game Up</title>
-
-  <!-- Bootstrap core CSS -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <%@ include file="header.jsp"%>
 
   <!-- Custom styles for this template -->
   <link href="css/catalogo.css" rel="stylesheet">
-  <link href="css/carousel.css" rel="stylesheet">
-  <link href="css/footer.css" rel="stylesheet">
 
 
 </head>
 
-<body>
 
-	<%@ include file="header.jsp"%>
+<body>
 
   <div class="d-flex" id="wrapper">
 
