@@ -28,8 +28,7 @@ public class GameDS implements DataAccessModel<GameBean> {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
-		//manca il campo genere
-		String insertSQL = "INSERT INTO " + GameDS.TABLE_NAME + " (Titolo, Descrizione, Immagine, Prezzo, Sconto) VALUES (?, ?, ?, ?, ?)";
+		String insertSQL = "INSERT INTO " + GameDS.TABLE_NAME + " (Titolo, Descrizione, Immagine, Prezzo, Sconto, Genere) VALUES (?, ?, ?, ?, ?, ?)";
 
 		try {
 			connection = ds.getConnection();
@@ -37,9 +36,11 @@ public class GameDS implements DataAccessModel<GameBean> {
 			preparedStatement.setString(1, game.getTitle());
 			preparedStatement.setString(2, game.getDescription());
 			preparedStatement.setString(3, game.getImg());
-			preparedStatement.setDouble(4, game.getPrice());			
+			preparedStatement.setDouble(4, game.getPrice());
+			preparedStatement.setInt(5, game.getSconto());
+			preparedStatement.setString(6, game.getGenere());
 			
-
+			
 			preparedStatement.executeUpdate();
 			
 			//Aggiorna l'ID del gioco generato dall'SQL

@@ -18,18 +18,6 @@ CREATE TABLE IF NOT EXISTS `fatturazione` (
   KEY `ID_Utente` (`ID_Utente`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Struttura della tabella `genere`
---
-
-DROP TABLE IF EXISTS `genere`;
-CREATE TABLE IF NOT EXISTS `genere` (
-  `ID_Genere` int(11) NOT NULL AUTO_INCREMENT,
-  `Tipo` varchar(40) NOT NULL,
-  PRIMARY KEY (`ID_Genere`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
