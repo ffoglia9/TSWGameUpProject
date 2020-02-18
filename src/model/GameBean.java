@@ -86,7 +86,6 @@ public class GameBean implements Serializable {
 		this.sponsorID = sponsorID;
 	}
 
-
 	public int getSconto() {
 		return sconto;
 	}
