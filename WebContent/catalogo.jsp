@@ -23,6 +23,8 @@
 
 <body>
 
+	<%@ include file="header.jsp"%>
+
   <div class="d-flex" id="wrapper">
 
     <!-- Sidebar -->
@@ -80,10 +82,7 @@
   </div>
   <!-- /#wrapper -->
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
+   <%@ include file="footer.jsp"%>
 
   <!-- Menu Toggle Script -->
   <script>
