@@ -44,6 +44,10 @@ CREATE TABLE IF NOT EXISTS `gioco` (
   `Descrizione` varchar(255) NOT NULL,
   `Immagine` varchar(255) NOT NULL,
   `Prezzo` double NOT NULL,
+  `Sconto` int NOT NULL,
+  `Genere` ENUM('Action','RTS','Adventure','Puzzle','Arcade') NOT NULL,
+  `ID_Sponsor` int(11) NOT NULL,
+  KEY `ID_Sponsor` (`ID_Sponsor`)
   PRIMARY KEY (`ID_Gioco`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -73,11 +77,9 @@ CREATE TABLE IF NOT EXISTS `recensione` (
 DROP TABLE IF EXISTS `sponsorizzazione`;
 CREATE TABLE IF NOT EXISTS `sponsorizzazione` (
   `ID_Sponsor` int(11) NOT NULL AUTO_INCREMENT,
-  `ID_Gioco` int(11) NOT NULL,
   `DataInizio` date NOT NULL,
   `DataFine` date NOT NULL,
   PRIMARY KEY (`ID_Sponsor`),
-  KEY `ID_Gioco` (`ID_Gioco`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------

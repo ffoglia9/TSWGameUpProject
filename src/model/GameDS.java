@@ -27,8 +27,9 @@ public class GameDS implements DataAccessModel<GameBean> {
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-
-		String insertSQL = "INSERT INTO " + GameDS.TABLE_NAME + " (Titolo, Descrizione, Immagine, Prezzo) VALUES (?, ?, ?, ?)";
+		
+		//manca il campo genere
+		String insertSQL = "INSERT INTO " + GameDS.TABLE_NAME + " (Titolo, Descrizione, Immagine, Prezzo, Sconto) VALUES (?, ?, ?, ?, ?)";
 
 		try {
 			connection = ds.getConnection();
@@ -36,7 +37,8 @@ public class GameDS implements DataAccessModel<GameBean> {
 			preparedStatement.setString(1, game.getTitle());
 			preparedStatement.setString(2, game.getDescription());
 			preparedStatement.setString(3, game.getImg());
-			preparedStatement.setDouble(4, game.getPrice());
+			preparedStatement.setDouble(4, game.getPrice());			
+			
 
 			preparedStatement.executeUpdate();
 			
@@ -81,6 +83,9 @@ public class GameDS implements DataAccessModel<GameBean> {
 				bean.setDescription(rs.getString("Descrizione"));
 				bean.setImg(rs.getString("Immagine"));
 				bean.setPrice(rs.getDouble("Prezzo"));
+				bean.setSconto(rs.getInt("Sconto"));
+				bean.setSponsorID(rs.getInt("ID_Sponsor"));
+				bean.setGenere(rs.getString("Genere"));
 			}
 
 		} catch (SQLException e) {
@@ -161,6 +166,9 @@ public class GameDS implements DataAccessModel<GameBean> {
 				bean.setDescription(rs.getString("Descrizione"));
 				bean.setPrice(rs.getInt("Prezzo"));
 				bean.setImg(rs.getString("Immagine"));
+				bean.setSconto(rs.getInt("Sconto"));
+				bean.setSponsorID(rs.getInt("ID_Sponsor"));
+				bean.setGenere(rs.getString("Genere"));
 				games.add(bean);
 			}
 

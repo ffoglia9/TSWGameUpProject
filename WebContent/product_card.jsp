@@ -7,7 +7,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Brawl stars</h5>
                   <p class="card-text">This is a wider card</p>
-                  <button type="button" class="btn btn-primary btn-sm" onclick="openPage('singleproduct.jsp')">16,99 &euro;</button>
+                  <button type="button" class="btn btn-primary btn-sm" onclick= "window.location.href = 'singleproduct.jsp'" >16,99 &euro;</button>
                 </div>
               </div>
             </div>

@@ -14,7 +14,6 @@
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
-
     <!-- Custom styles for this template -->
     <link href="css/imgproduct.css" rel="stylesheet">
     <link href="css/carousel.css" rel="stylesheet">
@@ -80,7 +79,6 @@
 		                    <h5>Requisiti di sistema</h5>
 		                    <p> <%= gb.getDescription() %> </p> //TODO scegliere come gestire i requisiti di sistema (creare una nuova variabile / integrare nella descrizione)
 		                    
-		
 		                    <hr>
 		                    <h5>Recensioni</h5>
 		                    <p> <%= gb.getReviewString() %> </p>
