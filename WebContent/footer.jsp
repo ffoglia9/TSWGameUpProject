@@ -1,4 +1,4 @@
-<footer id="sticky-footer" class="py-5 bg-dark text-white-50">
+<footer id="sticky-footer" class="fixed-bottom py-5 bg-dark text-white-50">
     <div class="container text-center">
       <small>Copyright 2020 &copy; Game Up</small>
     </div>

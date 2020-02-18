@@ -10,13 +10,11 @@
     <meta name="author" content="">
 
     <title>Shop Item - Start Bootstrap Template</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Header -->
+	<%@ include file = "header.jsp" %>
 
     <!-- Custom styles for this template -->
     <link href="css/imgproduct.css" rel="stylesheet">
-    <link href="css/carousel.css" rel="stylesheet">
     <link href="css/registernow.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
@@ -39,18 +37,14 @@
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
+		}
 	%>
 
 </head>
 
-
-<!-- Header -->
-<%@ include file = "header.jsp" %>
-
 <body>
 
 <!-- TODO Navigation bar -->
-
 	<!-- Page Content -->
 	<div class="container">
 		
@@ -100,6 +94,21 @@
 		        <!-- /.col-lg-9 -->
 		
 		    </div>
+		    
+		    <script>
+			    $(document).ready(function(){
+			    	console.log("TEST");
+			    	$("#acquisto").click(function() {
+			    		console.log("TEST2");
+			    		$.post("CartManager", 
+			    				{ID: <%= gb.getCode() %>},
+			    				function(data) {
+			    					$("#errorLogin").text(data);
+			    				}
+			    		)
+			    	})
+			    });
+			</script>
 	    
 	    <% } else { %>
 			<div><h1>Errore: ID assente.</h1></div>
@@ -110,21 +119,6 @@
 
 <!-- Footer -->
 <%@ include file="footer.jsp"%>
-<script>
-    $(document).ready(function(){
-    	console.log("TEST");
-    	$("#acquisto").click(function() {
-    		console.log("TEST2");
-    		$.post("CartManager", 
-    				{ID: <%= gb.getCode() %>},
-    				function(data) {
-    					$("#errorLogin").text(data);
-    				}
-    		)
-    	})
-    });
-    <% } %>
-</script>
 
 
 </body>
