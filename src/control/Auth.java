@@ -49,7 +49,6 @@ public class Auth implements Filter {
 		HttpServletResponse hresp = (HttpServletResponse) response; 
 		HttpSession session = rq.getSession(false);
 		if(session == null) {
-			hresp.sendError(HttpServletResponse.SC_FORBIDDEN);
 			hresp.sendRedirect(hresp.encodeRedirectURL("./index.jsp?forceSignIn=1"));
 			return;
 		}
@@ -66,7 +65,7 @@ public class Auth implements Filter {
 			int userTypeRequiredID = Integer.parseInt(UserBean.getUserTypeValue(userTypeRequired));
 			int uBeanUserTypeID = Integer.parseInt(uBean.getUserTypeID());
 			if(userTypeRequiredID > uBeanUserTypeID) { // l'utente non è dello stesso tipo ne è più importante
-				hresp.sendError(HttpServletResponse.SC_FORBIDDEN);
+				hresp.sendRedirect(hresp.encodeRedirectURL("./index.jsp?forceSignIn=1"));
 				return;
 			}
 		}

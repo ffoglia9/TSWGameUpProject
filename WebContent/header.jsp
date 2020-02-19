@@ -133,7 +133,7 @@
     </div>
   </div>
   <%
-  	if(request.getParameter("forceSignIn") != null) {
+  	if(request.getParameter("forceSignIn") != null && request.getSession().getAttribute("userBean") == null) {
   %>
   <script>
   $(document).ready(function() {

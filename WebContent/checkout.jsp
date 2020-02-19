@@ -17,7 +17,19 @@
     <link href="css/carousel.css" rel="stylesheet">
 </head>
 <body>
-<%@ include file="header.jsp"%>
+	<%@ include file="header.jsp"%>
+	<%@ page import = "model.UserBean" %>
+	<%@ page import = "model.UserBean.tipoUtente" %>
+	<%@ page import = "model.BillDS" %>
+	<%@ page import = "model.BillBean" %>
+	<%@ page import = "javax.sql.DataSource" %>
+	<%
+		UserBean uBean = (UserBean) request.getSession().getAttribute("userBean");
+    	DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
+    	BillDS bds = new BillDS(ds);
+    	BillBean lastBill = bds.doRetrieveByUserID(uBean.getUserID());
+	%>
+
 <div class="container">
     <div class="py-5 text-center">
         <img class="d-block mx-auto mb-2" src="gameuppngsfondonero1.png" alt="" width="100" height="100">
@@ -80,92 +92,56 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="firstName">Nome</label>
-                        <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
-                        <div class="invalid-feedback">
-                            Valid first name is required.
-                        </div>
+                        <input type="text" class="form-control" id="firstName" placeholder="" required <%
+                        	if(lastBill != null) {
+                        %> value="<%=lastBill.getName() %>"
+                        
+                        <% } %>
+                        >
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="lastName">Cognome</label>
-                        <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
-                        <div class="invalid-feedback">
-                            Valid last name is required.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <label for="username">Username</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">@</span>
-                        </div>
-                        <input type="text" class="form-control" id="username" placeholder="Username" required>
-                        <div class="invalid-feedback" style="width: 100%;">
-                            Your username is required.
-                        </div>
+                        <input type="text" class="form-control" id="lastName" placeholder="" required <%
+                        	if(lastBill != null) {
+                        %> value="<%=lastBill.getSurname() %>"
+                        
+                        <% } %>               
+                        >
                     </div>
                 </div>
 
                 <div class="mb-3">
                     <label for="email">Email <span class="text-muted">(Optional)</span></label>
-                    <input type="email" class="form-control" id="email" placeholder="you@example.com">
-                    <div class="invalid-feedback">
-                        Please enter a valid email address for shipping updates.
-                    </div>
+                    <input type="email" class="form-control" id="email" placeholder="you@example.com" <%
+                        	if(lastBill != null) {
+                        %> value="<%=lastBill.getEmail() %>"
+                        
+                        <% } %>
+                        >
                 </div>
 
                 <div class="mb-3">
                     <label for="address">Indirizzo</label>
-                    <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
-                    <div class="invalid-feedback">
-                        Please enter your shipping address.
-                    </div>
+                    <input type="text" class="form-control" id="address" placeholder="1234 Main St" required <%
+                        	if(lastBill != null) {
+                        %> value="<%=lastBill.getAddress() %>"
+                        
+                        <% } %>
+                        >
+
                 </div>
 
-                <div class="mb-3">
-                    <label for="address2">Indirizzo 2 <span class="text-muted">(Optional)</span></label>
-                    <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+               
+               <div class="mb-3">
+                    <label for="zip">CAP</label>
+                   <input type="text" class="form-control" id="zip" placeholder="" required <%
+                        	if(lastBill != null) {
+                        %> value="<%=lastBill.getCAP() %>"
+                        
+                        <% } %>
+                        >
                 </div>
 
-                <div class="row">
-                    <div class="col-md-5 mb-3">
-                        <label for="country">Nazione</label>
-                        <select class="custom-select d-block w-100" id="country" required>
-                            <option value="">Choose...</option>
-                            <option>United States</option>
-                        </select>
-                        <div class="invalid-feedback">
-                            Please select a valid country.
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="state">Stato</label>
-                        <select class="custom-select d-block w-100" id="state" required>
-                            <option value="">Choose...</option>
-                            <option>California</option>
-                        </select>
-                        <div class="invalid-feedback">
-                            Please provide a valid state.
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label for="zip">CAP</label>
-                        <input type="text" class="form-control" id="zip" placeholder="" required>
-                        <div class="invalid-feedback">
-                            Zip code required.
-                        </div>
-                    </div>
-                </div>
-                <hr class="mb-4">
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="same-address">
-                    <label class="custom-control-label" for="same-address">L'indirizzo di spedizione è lo stesso dell'indirizzo di fatturazione</label>
-                </div>
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="save-info">
-                    <label class="custom-control-label" for="save-info">Salva queste informazioni per la prossima volta</label>
-                </div>
                 <hr class="mb-4">
 
                 <h4 class="mb-3">Metodo di pagamento</h4>
@@ -227,13 +203,6 @@
     
 </div>
 
-
-
-
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script>window.jQuery || document.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-<script src="js/bootstrap.bundle.min.js"></script>
-<script src="js/form_validation.js"></script>
-<script src="js/signin_validation.js"></script>
+<!-- FOOTER -->
+<%@ include file="footer.jsp"%>
 </body>

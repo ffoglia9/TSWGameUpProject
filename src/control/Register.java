@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+import model.BillBean;
+import model.BillDS;
 import model.UserBean;
 import model.UserDS;
 import model.Validator;
@@ -44,8 +46,13 @@ public class Register extends HttpServlet {
 		}
 		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
 		UserDS userDB = new UserDS(ds);
+		BillDS fattDS = new BillDS(ds);
 		try {
 			userDB.doSave(user);
+			System.out.println(user.getUserID());
+			BillBean bill = new BillBean(-1, user.getUserID(), userData.get("nome"), userData.get("cognome"), userData.get("email"),
+							userData.get("indirizzo"), userData.get("citta"), userData.get("cap"));
+			fattDS.doSave(bill);
 		} catch (SQLException e) {
 			System.out.println("Error:" + e.getMessage());
 			return;
