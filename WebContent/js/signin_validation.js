@@ -45,3 +45,13 @@ $("#loginSubmit").click(function() {
 })
 
 Validations.specialBehaviour["loginFormemail"] = emailNotPresent;
+
+// Funzione per effettuare il logout
+function logout() {
+	$.ajax({
+		type: "GET",
+		url: "SignIn",
+		async: false
+	});
+	location.reload(true);
+}

@@ -51,8 +51,9 @@ public class SignIn extends HttpServlet {
 		
 	}
 	
+	// doGet effettua il logout dell'utente invalidando la sessione
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doPost(request, response);
+		request.getSession().invalidate();
 	}
 }
