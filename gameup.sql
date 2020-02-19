@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `fatturazione` (
   `Email` varchar(80) NOT NULL,
   `Via` varchar(120) NOT NULL,
   `CAP` mediumint(9) NOT NULL,
-  `Citt√†` varchar(30) NOT NULL,
+  `City†` varchar(30) NOT NULL,
   PRIMARY KEY (`ID_Fatturazione`),
   KEY `ID_Utente` (`ID_Utente`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

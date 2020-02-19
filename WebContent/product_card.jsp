@@ -18,7 +18,7 @@
 		<div class="col-md-8">
 			<div class="card-body">
 				<h5 class="card-title"><%= gBean.getTitle() %></h5>
-				<p class="card-text"><%= gBean.getDescription() %></p> <!-- Da cambiare con un metodo che ritorna max y chars -->
+				<p class="card-text"><%= gBean.getShortDescription() %></p> 
 				<button type="button" class="btn btn-primary btn-sm"
 					onclick="window.location.href = 'singleproduct.jsp'"><%= gBean.getPrice() %>
 					&euro;</button>

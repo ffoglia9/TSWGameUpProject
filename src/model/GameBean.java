@@ -60,7 +60,7 @@ public class GameBean implements Serializable {
 		return description;
 	}
 	
-	public String getShortDescprition() {
+	public String getShortDescription() {
 		
 		String shortDesc;
 		shortDesc = this.description.substring(0, 101);

@@ -253,6 +253,50 @@ public class GameDS implements DataAccessModel<GameBean> {
 
 			while (rs.next()) {
 				GameBean bean = new GameBean();
+				bean.setCode(rs.getInt("ID_Gioco"));
+				bean.setTitle(rs.getString("Titolo"));
+				bean.setDescription(rs.getString("Descrizione"));
+				bean.setPrice(rs.getInt("Prezzo"));
+				bean.setImg(rs.getString("Immagine"));
+				bean.setSconto(rs.getInt("Sconto"));
+				bean.setSponsorID(rs.getInt("ID_Sponsor"));
+				bean.setGenere(rs.getString("Genere"));
+				bean.setApproved(rs.getBoolean("Approvato"));
+				bean.setUserID(rs.getInt("ID_Utente"));
+				bean.setIcon(rs.getString("Icon"));
+				bean.setValutazione(rs.getInt("Valutazione"));
+				games.add(bean);
+			}
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return games;
+	}
+	
+	public Collection<GameBean> doRetrieveByTitle(String title) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		Collection<GameBean> games = new LinkedList<GameBean>();
+
+		String selectSQL = "SELECT * FROM " + GameDS.TABLE_NAME + "WHERE Titolo LIKE '%?%'";
+
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setString(1, title);
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				GameBean bean = new GameBean();
 
 				bean.setCode(rs.getInt("ID_Gioco"));
 				bean.setTitle(rs.getString("Titolo"));
