@@ -6,6 +6,9 @@
     <meta name="description" content="">
     <meta name="generator" content="Jekyll v3.8.5">
     <title>Checkout</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Ensures optimal rendering on mobile devices. -->
+ 	<meta http-equiv="X-UA-Compatible" content="IE=edge" /> <!-- Optimal Internet Explorer compatibility -->
 
 
     <!-- Bootstrap core CSS -->
@@ -159,6 +162,7 @@
                         <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
                         <label class="custom-control-label" for="paypal">PayPal</label>
                     </div>
+                    
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-3">
@@ -202,6 +206,40 @@
 
     
 </div>
+
+<div id="paypal-button-container"></div>
+
+<script>
+    paypal.Buttons().render('#paypal-button-container');
+    // This function displays Smart Payment Buttons on your web page.
+  </script>
+  
+  <script>
+  paypal.Buttons({
+    createOrder: function(data, actions) {
+      // This function sets up the details of the transaction, including the amount and line item details.
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: '0.01'
+          }
+        }]
+      });
+    },
+    onApprove: function(data, actions) {
+      // This function captures the funds from the transaction.
+      return actions.order.capture().then(function(details) {
+        // This function shows a transaction success message to your buyer.
+        alert('Transaction completed by ' + details.payer.name.given_name);
+      });
+    }
+  }).render('#paypal-button-container');
+  //This function displays Smart Payment Buttons on your web page.
+	</script>
+
+	<script
+		src="https://www.paypal.com/sdk/js?client-id=Ad2cJIlZoF_6MquMvgkkQETkQyn7QQxlxicghzoXdu8-Za0VtWYWK4-OFjKs4t9HMlN6WrkfDWzM_YuW"> // Required. Replace SB_CLIENT_ID with your sandbox client ID.
+	</script>
 
 <!-- FOOTER -->
 <%@ include file="footer.jsp"%>
