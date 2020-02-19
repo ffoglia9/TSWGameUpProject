@@ -75,7 +75,7 @@ public class GameBean implements Serializable {
 		return img;
 	}
 
-	public void setImg(String icon) {
+	public void setImg(String img) {
 		this.img = img;
 	}
 	
