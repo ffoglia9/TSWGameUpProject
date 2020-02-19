@@ -19,6 +19,7 @@ public class GameBean implements Serializable {
 	int userID;
 	int sconto;
 	boolean approvato;
+	double valutazioneMed;
 	String genere; 
 	enum Genere {
 		Action,
@@ -147,6 +148,14 @@ public class GameBean implements Serializable {
 
 	public void setApproved(boolean approvato) {
 		this.approvato = approvato;
+	}
+
+	public double getValutazioneMed() {
+		return valutazioneMed;
+	}
+
+	public void setValutazioneMed(double valutazioneMedia) {
+		this.valutazioneMed = valutazioneMedia;
 	}
 
 	//metodo helper per controllare se il genere inserito è corretto / presente / valido
