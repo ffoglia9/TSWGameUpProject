@@ -198,13 +198,13 @@
 		
 		
 		<div id="pubblicaGioco" style="display:none">
-		<form id="registerForm" class="needs-validation" action="" method="post" novalidate>
+		<form id="registerForm" class="needs-validation" action="upload" method="post" novalidate enctype="multipart/form-data">
 
 			<div class="row">
 			
 				<div class="col-md-12 mb-3">
 					<label for="nomegioco">Nome del gioco<span class="text-muted"></span></label>
-                    <input name="nome" type="text" class="form-control" id="nomegioco" required>
+                    <input name="title" type="text" class="form-control" id="nomegioco" required>
 				</div>
 			
 			</div>
@@ -214,7 +214,7 @@
 			
 				<div class="col-md-12 mb-3">
 					<label for="descrizione">Descrizione<span class="text-muted"></span></label>
-                    <textarea class="form-control" id="descrizionegioco" rows="5"></textarea>
+                    <textarea name="descGioco" class="form-control" id="descrizionegioco" rows="5"></textarea>
 				</div>
 				
 			
@@ -226,7 +226,7 @@
 					<label for="descrizione">Carica la copertina del gioco<span class="text-muted"></span></label>
 					<div class="custom-file">
 					 	
-    					<input type="file" class="custom-file-input" id="customFile">
+    					<input type="file" class="custom-file-input" id="customFile" name="cover">
     					<label class="custom-file-label" for="customFile">Scegli file</label>
   					</div>
 				</div>
@@ -241,7 +241,7 @@
 					<label for="descrizione">Carica l'icona del gioco<span class="text-muted"></span></label>
 					<div class="custom-file">
 					 	
-    					<input type="file" class="custom-file-input" id="customFile">
+    					<input type="file" class="custom-file-input" id="customFile" name="icon">
     					<label class="custom-file-label" for="customFile">Scegli file</label>
   					</div>
 				</div>
@@ -261,7 +261,7 @@
 					
     					<span class="input-group-text">&euro;</span>
   					</div>
-  					<input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+  					<input type="text" name="price" class="form-control" aria-label="Amount (to the nearest dollar)">
 				</div>
 				
 				</div>
@@ -274,11 +274,13 @@
 					<div class="input-group-prepend">
     					<label class="input-group-text" for="inputGroupSelect01">categorie</label>
   					</div>
-  					<select class="custom-select" id="inputGroupSelect01">
+  					<select name="Categories" class="custom-select" id="inputGroupSelect01">
     					<option selected>Choose...</option>
-    					<option value="1">One</option>
-    					<option value="2">Two</option>
-    					<option value="3">Three</option>
+    					<option value="1">Action</option>
+    					<option value="2">FPS</option>
+    					<option value="3">Adventure</option>
+    					<option value="4">Puzzle</option>
+    					<option value="5">Arcade</option>
   					</select>
 					
 					</div>

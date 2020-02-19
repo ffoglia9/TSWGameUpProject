@@ -18,11 +18,11 @@
 		<div class="col-md-8">
 			<div class="card-body">
 				<h5 class="card-title"><%= gBean.getTitle() %></h5>
-				<p class="card-text"><%= gBean.getDescription() %></p> <!-- Da cambiare con un metodo che ritorna max y chars -->
+				<p class="card-text"><%= gBean.getShortDescription() %></p> <!-- Da cambiare con un metodo che ritorna max y chars -->
 				<button type="button" class="btn btn-primary btn-sm">Più informazioni</button>
 			</div>
 			<div class="card-footer"> <!-- Data acquisto -->
-    			Acquistato il 15/06/2019
+    			Acquistato il 15/06/2019 //Prendere data dinamicamente
   			</div>
 		</div>
 	</div>
