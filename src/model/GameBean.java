@@ -13,10 +13,12 @@ public class GameBean implements Serializable {
 	String title;
 	String description;
 	double price;
-	String img;
+	String img, icon;
 	List <ReviewBean> reviews;
 	int sponsorID;
+	int userID;
 	int sconto;
+	boolean approvato;
 	String genere; 
 	enum Genere {
 		Action,
@@ -77,6 +79,13 @@ public class GameBean implements Serializable {
 		this.img = img;
 	}
 	
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
 	
 	public int getSponsorID() {
 		return sponsorID;
@@ -115,6 +124,22 @@ public class GameBean implements Serializable {
 			this.genere = genere;
 	}
 	
+	public int getUserID() {
+		return this.userID;
+	}
+	
+	public void setUserID(int userID) {
+		this.userID = userID;
+	}
+	
+	public boolean isApproved() {
+		return approvato;
+	}
+
+	public void setApproved(boolean approvato) {
+		this.approvato = approvato;
+	}
+
 	//metodo helper per controllare se il genere inserito è corretto / presente / valido
 	private boolean checkGenere(String str){
 		  
