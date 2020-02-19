@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `gioco` (
   `Immagine` varchar(255) NOT NULL,
   `Icon` varchar(255) NOT NULL,
   `Prezzo` double NOT NULL,
-  `Sconto` int NOT NULL,
+  `Sconto` int NOT NULL DEFAULT 0,
   `Genere` ENUM('Action','RTS','Adventure','Puzzle','Arcade') NOT NULL,
   `ID_Sponsor` int(11) NOT NULL DEFAULT -1,
   `Approvato` tinyint(1) NOT NULL,
@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `utente` (
   `Password` varchar(21) NOT NULL,
   `Tipo_Utente` enum('0','1','2') NOT NULL,
   `Email` varchar(80) NOT NULL,
-  
-  
+
+
   PRIMARY KEY (`ID_Utente`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
