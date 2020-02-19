@@ -109,33 +109,31 @@
                 	
                 	<div class="col-md-6 mb-3">
                 		<label for="nome" class="lb">Nome</label>
-                       <input name="nome" type="text" class="form-control" id="nome" value="<%= uBean.getEmail() %>" readonly>
+                       <input name="nome" type="text" class="form-control" id="nome" value="<%= %>" readonly>
                 	</div>
                 	
                 	<div class="col-md-6 mb-3">
                 		<label for="cognome" class="lb">Cognome</label>
-                       <input name="nome" type="text" class="form-control" id="cognome" value="<%= uBean.getEmail() %>" readonly>
+                       <input name="cognome" type="text" class="form-control" id="cognome" value="<%= uBean.getEmail() %>" readonly>
                 	</div>
                 	
                 	<div class="col-md-6 mb-3">
-                		<label for="cognome" class="lb">Via e numero civico</label>
-                       <input name="nome" type="text" class="form-control" id="cognome" value="<%= uBean.getEmail() %>" readonly>
+                		<label for="via" class="lb">Via e numero civico</label>
+                       <input name="via" type="text" class="form-control" id="via" value="<%= uBean.getEmail() %>" readonly>
                 	</div>
                 	
                 	<div class="col-md-6 mb-3">
-                		<label for="cognome" class="lb">CAP</label>
-                       <input name="nome" type="text" class="form-control" id="cognome" value="<%= uBean.getEmail() %>" readonly>
+                		<label for="cap" class="lb">CAP</label>
+                       <input name="cap" type="text" class="form-control" id="cap" value="<%= uBean.getEmail() %>" readonly>
                 	</div>
                 	
                 	<div class="col-md-6 mb-5">
-                		<label for="cognome" class="lb">Città</label>
-                       <input name="nome" type="text" class="form-control" id="cognome" value="<%= uBean.getEmail() %>" readonly>
+                		<label for="city" class="lb">Città</label>
+                       <input name="city" type="text" class="form-control" id="city" value="<%= uBean.getEmail() %>" readonly>
                 	</div>
                 	
                 
                 </div>
-                
-                
                 
                 
                 <div class="row">
