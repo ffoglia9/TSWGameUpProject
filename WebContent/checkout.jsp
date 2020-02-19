@@ -210,7 +210,7 @@
 </div>
 
 <div id="paypal-button-container"></div>
-<script src="https://www.paypal.com/sdk/js?client-id=sb&currency=EUR" data-sdk-integration-source="button-factory"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=Ad2cJIlZoF_6MquMvgkkQETkQyn7QQxlxicghzoXdu8-Za0VtWYWK4-OFjKs4t9HMlN6WrkfDWzM_YuW&currency=EUR" data-sdk-integration-source="button-factory"></script>
 <script>
     paypal.Buttons({
         style: {
