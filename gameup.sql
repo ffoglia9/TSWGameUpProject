@@ -1,5 +1,3 @@
-fatturazione
-
 --
 -- Struttura della tabella `fatturazione`
 --
@@ -35,11 +33,11 @@ CREATE TABLE IF NOT EXISTS `gioco` (
   `Prezzo` double NOT NULL,
   `Sconto` int NOT NULL,
   `Genere` ENUM('Action','RTS','Adventure','Puzzle','Arcade') NOT NULL,
-  `ID_Sponsor` int(11) NOT NULL SET DEFAULT -1,
+  `ID_Sponsor` int(11) NOT NULL DEFAULT -1,
   `Approvato` tinyint(1) NOT NULL,
   `ID_Utente` int(11) NOT NULL,
-  KEY `ID_Sponsor` (`ID_Sponsor`)
-  KEY `ID_Utente`(`ID_Utente`) NOT NULL
+  KEY `ID_Sponsor` (`ID_Sponsor`),
+  KEY `ID_Utente`(`ID_Utente`),
   PRIMARY KEY (`ID_Gioco`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -71,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `sponsorizzazione` (
   `ID_Sponsor` int(11) NOT NULL AUTO_INCREMENT,
   `DataInizio` date NOT NULL,
   `DataFine` date NOT NULL,
-  PRIMARY KEY (`ID_Sponsor`),
+  PRIMARY KEY (`ID_Sponsor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
