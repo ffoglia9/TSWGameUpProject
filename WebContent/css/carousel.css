@@ -43,6 +43,10 @@ body {
   float: right;
 }
 
+.card-footer{
+	color:#dedddd;
+}
+
 .btn {
   border-radius: 27px 27px 27px 27px;
   background-color: #f0f0f6;

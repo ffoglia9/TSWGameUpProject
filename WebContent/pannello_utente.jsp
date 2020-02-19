@@ -345,20 +345,37 @@
 		<div id="daSponsorizzare" style="display: none">
 			BOOLEANO ACCETTATO SETTATO A FALSE DI DEFAULT
 			MESSO A VERO QUANDO L'ADMIN ACCETTA LA SPONSORIZZAZIONE
+			<div class="row">
+				<div class="col-md-12">
+                	<jsp:include page="sponsor_card.jsp">
+              		<jsp:param name="ID" value="1"/>
+              		</jsp:include>
+                </div>
+                
+                <div class="col-md-12">
+                	<jsp:include page="sponsor_card.jsp">
+              		<jsp:param name="ID" value="1"/>
+              		</jsp:include>
+                </div>
+                
+				
+			</div>
+			
+			
+			
 		</div>
 		<% } %>
 		
       </div>
     </div>
     <!-- /#page-content-wrapper -->
-
-  </div>
+ 
   </div>
 
 
   <!-- /#wrapper -->
 
-  <!-- <%@ include file="footer.jsp"%>  --> 
+   <%@ include file="footer.jsp"%> 
 
   <!-- Menu Toggle Script -->
   <script>
@@ -389,6 +406,8 @@
     
     
   </script>
+  
+  
 
 </body>
 
