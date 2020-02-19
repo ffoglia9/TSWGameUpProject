@@ -233,5 +233,7 @@ public class GameDS implements DataAccessModel<GameBean> {
 		}
 		return (result != 0);
 	}
+	
+	//getBestGames
 
 }

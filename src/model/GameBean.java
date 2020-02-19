@@ -58,6 +58,15 @@ public class GameBean implements Serializable {
 	public String getDescription() {
 		return description;
 	}
+	
+	public String getShortDescprition() {
+		
+		String shortDesc;
+		shortDesc = this.description.substring(0, 101);
+		if(this.description.length() > shortDesc.length())
+			shortDesc = shortDesc.concat("...");
+		return shortDesc;
+	}
 
 	public void setDescription(String description) {
 		this.description = description;
