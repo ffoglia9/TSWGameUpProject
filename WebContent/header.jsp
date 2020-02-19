@@ -132,4 +132,13 @@
       </div>
     </div>
   </div>
+  <%
+  	if(request.getParameter("forceSignIn") != null) {
+  %>
+  <script>
+  $(document).ready(function() {
+		$("#exampleModalCenter").modal("show");
+	});
+  </script>
+  <% } %>
 </header>

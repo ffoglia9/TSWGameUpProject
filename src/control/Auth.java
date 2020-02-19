@@ -50,12 +50,13 @@ public class Auth implements Filter {
 		HttpSession session = rq.getSession(false);
 		if(session == null) {
 			hresp.sendError(HttpServletResponse.SC_FORBIDDEN);
+			hresp.sendRedirect(hresp.encodeRedirectURL("./index.jsp?forceSignIn=1"));
 			return;
 		}
 		
 		UserBean uBean = (UserBean) session.getAttribute("userBean");
 		if(uBean == null) {
-			hresp.sendError(HttpServletResponse.SC_FORBIDDEN);
+			hresp.sendRedirect(hresp.encodeRedirectURL("./index.jsp?forceSignIn=1"));
 			return;
 		}
 		
