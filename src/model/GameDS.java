@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -153,17 +154,18 @@ public class GameDS implements DataAccessModel<GameBean> {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		Collection<GameBean> games = new LinkedList<GameBean>();
+		Collection<GameBean> games = new ArrayList<GameBean>();
 
 		String selectSQL = "SELECT * FROM " + GameDS.TABLE_NAME;
 
 		if (order != null && !order.equals("")) {
-			selectSQL += " ORDER BY " + order;
+			selectSQL += " ORDER BY ?";
 		}
 
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setString(1, order);
 
 			ResultSet rs = preparedStatement.executeQuery();
 
@@ -240,9 +242,9 @@ public class GameDS implements DataAccessModel<GameBean> {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		Collection<GameBean> games = new LinkedList<GameBean>();
+		Collection<GameBean> games = new ArrayList<GameBean>();
 
-		String selectSQL = "SELECT * FROM " + GameDS.TABLE_NAME + "WHERE Genere = ?";
+		String selectSQL = "SELECT * FROM " + GameDS.TABLE_NAME + " WHERE Genere = ?";
 
 		try {
 			connection = ds.getConnection();
@@ -284,14 +286,14 @@ public class GameDS implements DataAccessModel<GameBean> {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		Collection<GameBean> games = new LinkedList<GameBean>();
+		Collection<GameBean> games = new ArrayList<GameBean>();
 
-		String selectSQL = "SELECT * FROM " + GameDS.TABLE_NAME + "WHERE Titolo LIKE '%?%'";
+		String selectSQL = "SELECT * FROM " + GameDS.TABLE_NAME + " WHERE Titolo LIKE ?";
 
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
-			preparedStatement.setString(1, title);
+			preparedStatement.setString(1, "%" + title + "%");
 
 			ResultSet rs = preparedStatement.executeQuery();
 
