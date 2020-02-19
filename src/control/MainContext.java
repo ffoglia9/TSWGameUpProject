@@ -1,5 +1,8 @@
 package control;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -14,8 +17,8 @@ public class MainContext implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
 		ServletContext context = sce.getServletContext();
-
 		DataSource ds = null;
+		
 		try {
 			Context initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");

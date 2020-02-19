@@ -198,13 +198,13 @@
 		
 		
 		<div id="pubblicaGioco" style="display:none">
-		<form id="registerForm" class="needs-validation" action="upload" method="post" novalidate>
+		<form id="registerForm" class="needs-validation" action="upload" method="post" novalidate enctype="multipart/form-data">
 
 			<div class="row">
 			
 				<div class="col-md-12 mb-3">
 					<label for="nomegioco">Nome del gioco<span class="text-muted"></span></label>
-                    <input name="nome" type="text" class="form-control" id="nomegioco" required>
+                    <input name="title" type="text" class="form-control" id="nomegioco" required>
 				</div>
 			
 			</div>
