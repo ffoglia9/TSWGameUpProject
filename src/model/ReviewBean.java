@@ -2,14 +2,15 @@ package model;
 
 public class ReviewBean {
 	
-	private int ID_recensione;
+	private int ID_review;
 	private boolean liked;
 	private String review;
 	private int ID_gioco;
 	private int ID_utente;
 	
 	
-	public ReviewBean(boolean liked, String review, int ID_gioco, int ID_utente) {
+	public ReviewBean(int ID_review, boolean liked, String review, int ID_gioco, int ID_utente) {
+		this.ID_review = ID_review;
 		this.liked = liked;
 		this.review = review;
 		this.ID_gioco = ID_gioco;
@@ -46,11 +47,11 @@ public class ReviewBean {
 	}
 	
 	public void setReviewID(int code) {
-		ID_recensione = code;
+		ID_review = code;
 	}
 	
 	public int getReviewID() {
-		return ID_recensione;
+		return ID_review;
 	}
 	
 }

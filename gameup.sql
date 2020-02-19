@@ -10,8 +10,8 @@ CREATE TABLE IF NOT EXISTS `fatturazione` (
   `Cognome` varchar(40) NOT NULL,
   `Email` varchar(80) NOT NULL,
   `Via` varchar(120) NOT NULL,
-  `CAP` mediumint(9) NOT NULL,
-  `City ` varchar(30) NOT NULL,
+  `CAP` varchar(10) NOT NULL,
+  `City` varchar(30) NOT NULL,
   PRIMARY KEY (`ID_Fatturazione`),
   KEY `ID_Utente` (`ID_Utente`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -103,7 +103,5 @@ CREATE TABLE IF NOT EXISTS `utente` (
   `Password` varchar(21) NOT NULL,
   `Tipo_Utente` enum('0','1','2') NOT NULL,
   `Email` varchar(80) NOT NULL,
-
-
   PRIMARY KEY (`ID_Utente`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
