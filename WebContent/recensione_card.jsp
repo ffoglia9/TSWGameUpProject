@@ -8,20 +8,15 @@
 	GameDS gameDS = new GameDS(ds);
 	GameBean gBean = gameDS.doRetrieveByKey(ID); // Può ritornare null, ma in questo caso il problema non risiede qui e va risolto
 %>
-
-<div class="card shadow-lg py-4 mb-3" style="max-width: 540px;">
+<div class="card shadow-lg py-4 mb-3" style="max-width: 540px;" >
 	<div class="row ">
-		<div
-			class="col-md-4 my-auto img-hover-zoom img-hover-zoom--brightness">
-			<img src="img1.jpg" class="card-img shadow-lg align-middle" alt="...">
+		<div class="ml-3">
+			
 		</div>
 		<div class="col-md-8">
 			<div class="card-body">
 				<h5 class="card-title"><%= gBean.getTitle() %></h5>
-				<p class="card-text"><%= gBean.getDescription() %></p> 
-				<button type="button" class="btn btn-primary btn-sm"
-					onclick="window.location.href = 'singleproduct.jsp'"><%= gBean.getPrice() %>
-					&euro;</button>
+				<p class="card-text"><%= gBean.getDescription() %></p> <!-- aggiungere descrizione-->
 			</div>
 		</div>
 	</div>

@@ -193,6 +193,23 @@
 		<div id="mieApp" style="display: none">
 			LISTA APP
 			FARE UN SELECT DI TUTTI I GIOCHI CON ID UTENTE DELL'UBEAN
+			
+			<div class="row">
+				<div class="col-md-12">
+                	<jsp:include page="app_developer.jsp">
+              		<jsp:param name="ID" value="1"/>
+              		</jsp:include>
+                </div>
+                
+                <div class="col-md-12">
+                	<jsp:include page="app_developer.jsp">
+              		<jsp:param name="ID" value="1"/>
+              		</jsp:include>
+                </div>
+			
+			
+			
+		</div>
 		</div>
 		
 		
@@ -282,29 +299,15 @@
   					</select>
 					
 					</div>
-				
 				</div>
-				
-				
-				
 				</div>
-				
-				
 				<div class="row">
-                <div class="col-8 mt-5 mb-3">
+                	<div class="col-8 mt-5 mb-3">
                 </div>
-                
                 <div class="col-4 mt-4 mb-3">
                  	<button class="btn btn-primary btn-block" type="submit">Invia</button>
-                
                 </div>
                 </div>
-                
-                
-				
-				
-				
-		
 		</form>
 		</div>
 		
@@ -317,6 +320,25 @@
 		<div id="daApprovare" style="display: none">
 			BOOLEANO ACCETTATO SETTATO A FALSE PER LE PROPOSTE DI GIOCO
 			MESSO A VERO QUANDO L'ADMIN ACCETTA
+			
+			<div class="row">
+				<div class="col-md-12">
+                	<jsp:include page="app_pending.jsp">
+              		<jsp:param name="ID" value="1"/>
+              		</jsp:include>
+                </div>
+                
+                <div class="col-md-12">
+                	<jsp:include page="app_pending.jsp">
+              		<jsp:param name="ID" value="1"/>
+              		</jsp:include>
+                </div>
+                
+				
+			</div>
+			
+			
+			
 		</div>
 		
 		<!-- Lista dei giochi in attesa di sponsorizzazione -->
@@ -330,6 +352,7 @@
     </div>
     <!-- /#page-content-wrapper -->
 
+  </div>
   </div>
 
 
