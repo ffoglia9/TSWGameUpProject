@@ -92,21 +92,29 @@
       <p class="h1 text-left mb-4">Offerte del giorno</p>
       <div class="row">
         <div class="col">
-  <%@ include file="product_card.jsp"%>
+  			<jsp:include page="product_card.jsp">
+              	<jsp:param name="ID" value="1"/>
+              </jsp:include>
         </div>
         <div class="col">
-        <%@ include file="product_card.jsp"%>
+        <jsp:include page="product_card.jsp">
+              	<jsp:param name="ID" value="1"/>
+              </jsp:include>
 
         </div>
       </div>
 
       <div class="row">
         <div class="col">
-          <%@ include file="product_card.jsp"%>
+          <jsp:include page="product_card.jsp">
+              	<jsp:param name="ID" value="1"/>
+              </jsp:include>
 
         </div>
         <div class="col">
-            <%@ include file="product_card.jsp"%>
+            <jsp:include page="product_card.jsp">
+              	<jsp:param name="ID" value="1"/>
+              </jsp:include>
 
         </div>
       </div>
@@ -122,22 +130,30 @@
       <p class="h1 text-left mb-4">Giochi che adoriamo</p>
       <div class="row">
         <div class="col">
-            <%@ include file="product_card.jsp"%>
+            <jsp:include page="product_card.jsp">
+              	<jsp:param name="ID" value="1"/>
+              </jsp:include>
 
         </div>
         <div class="col">
-         <%@ include file="product_card.jsp"%>
+         <jsp:include page="product_card.jsp">
+              	<jsp:param name="ID" value="1"/>
+              </jsp:include>
 
         </div>
       </div>
 
       <div class="row">
         <div class="col">
-           <%@ include file="product_card.jsp"%>
+           <jsp:include page="product_card.jsp">
+              	<jsp:param name="ID" value="1"/>
+              </jsp:include>
 
         </div>
         <div class="col">
-            <%@ include file="product_card.jsp"%>
+            <jsp:include page="product_card.jsp">
+              	<jsp:param name="ID" value="1"/>
+              </jsp:include>
 
         </div>
       </div>
