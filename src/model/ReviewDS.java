@@ -185,7 +185,7 @@ public class ReviewDS implements DataAccessModel<ReviewBean>{
 		PreparedStatement preparedStatement = null;
 		int result = 0;
 
-		String updateSQL = "UPDATE " + ReviewDS.TABLE_NAME + " (ID_Gioco, ID_Utente, Consigliato, Opinione) VALUES (?, ?, ?, ?) WHERE ID_Recensione = ?";
+		String updateSQL = "UPDATE " + ReviewDS.TABLE_NAME + "SET ID_Gioco = ?, ID_Utente = ?, Consigliato = ?, Opinione = ?) WHERE ID_Recensione = ?";
 
 		try {
 			connection = ds.getConnection();
