@@ -31,11 +31,13 @@ CREATE TABLE IF NOT EXISTS `gioco` (
   `Titolo` varchar(60) NOT NULL,
   `Descrizione` varchar(255) NOT NULL,
   `Immagine` varchar(255) NOT NULL,
+  `Icon` varchar(255) NOT NULL,
   `Prezzo` double NOT NULL,
   `Sconto` int NOT NULL,
   `Genere` ENUM('Action','RTS','Adventure','Puzzle','Arcade') NOT NULL,
   `ID_Sponsor` int(11) NOT NULL SET DEFAULT -1,
   `Approvato` tinyint(1) NOT NULL,
+  `ID_Utente` int(11) NOT NULL,
   KEY `ID_Sponsor` (`ID_Sponsor`)
   KEY `ID_Utente`(`ID_Utente`) NOT NULL
   PRIMARY KEY (`ID_Gioco`)

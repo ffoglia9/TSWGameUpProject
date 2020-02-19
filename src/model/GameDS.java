@@ -28,7 +28,7 @@ public class GameDS implements DataAccessModel<GameBean> {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
-		String insertSQL = "INSERT INTO " + GameDS.TABLE_NAME + " (Titolo, Descrizione, Immagine, Prezzo, Sconto, Genere, ID_Utente, Approvato) "
+		String insertSQL = "INSERT INTO " + GameDS.TABLE_NAME + " (Titolo, Descrizione, Immagine, Prezzo, Sconto, Genere, ID_Utente, Approvato, Icona) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
@@ -42,6 +42,7 @@ public class GameDS implements DataAccessModel<GameBean> {
 			preparedStatement.setString(6, game.getGenere());
 			preparedStatement.setInt(7, game.getUserID());
 			preparedStatement.setBoolean(8, game.isApproved());
+			preparedStatement.setString(9, game.getIcon());
 			
 			
 			preparedStatement.executeUpdate();
@@ -92,6 +93,7 @@ public class GameDS implements DataAccessModel<GameBean> {
 				bean.setGenere(rs.getString("Genere"));
 				bean.setApproved(rs.getBoolean("Approvato"));
 				bean.setUserID(rs.getInt("ID_Utente"));
+				bean.setIcon(rs.getString("Icon"));
 			}
 
 		} catch (SQLException e) {
@@ -177,6 +179,7 @@ public class GameDS implements DataAccessModel<GameBean> {
 				bean.setGenere(rs.getString("Genere"));
 				bean.setApproved(rs.getBoolean("Approvato"));
 				bean.setUserID(rs.getInt("ID_Utente"));
+				bean.setIcon(rs.getString("Icon"));
 				games.add(bean);
 			}
 
@@ -199,7 +202,7 @@ public class GameDS implements DataAccessModel<GameBean> {
 		PreparedStatement preparedStatement = null;
 		int result = 0;
 
-		String updateSQL = "UPDATE " + GameDS.TABLE_NAME + " (Titolo, Descrizione, Immagine, Prezzo, ID_Sponsor, Sconto, Approvato) VALUES (?, ?, ?, ?, ?, ?) WHERE ID_Gioco = ?";
+		String updateSQL = "UPDATE " + GameDS.TABLE_NAME + " (Titolo, Descrizione, Immagine, Prezzo, ID_Sponsor, Sconto, Approvato, Icon) VALUES (?, ?, ?, ?, ?, ?, ?, ?) WHERE ID_Gioco = ?";
 
 		try {
 			connection = ds.getConnection();
@@ -211,8 +214,9 @@ public class GameDS implements DataAccessModel<GameBean> {
 			preparedStatement.setInt(5, game.getSponsorID());
 			preparedStatement.setInt(6, game.getSconto());
 			preparedStatement.setBoolean(7, game.isApproved());
+			preparedStatement.setString(8, game.getIcon());
 			//WHERE ID_GIOCO = ?
-			preparedStatement.setInt(8, game.getCode());
+			preparedStatement.setInt(9, game.getCode());
 			
 
 			result = preparedStatement.executeUpdate();

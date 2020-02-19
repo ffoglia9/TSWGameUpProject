@@ -13,7 +13,7 @@ public class GameBean implements Serializable {
 	String title;
 	String description;
 	double price;
-	String img;
+	String img, icon;
 	List <ReviewBean> reviews;
 	int sponsorID;
 	int userID;
@@ -75,10 +75,17 @@ public class GameBean implements Serializable {
 		return img;
 	}
 
-	public void setImg(String img) {
+	public void setImg(String icon) {
 		this.img = img;
 	}
 	
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
 	
 	public int getSponsorID() {
 		return sponsorID;
