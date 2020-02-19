@@ -13,6 +13,9 @@
 
   <!-- Custom styles for this template -->
   <link href="css/catalogo.css" rel="stylesheet">
+    <link href="css/registernow.css" rel="stylesheet">
+  
+  
   
    <%@ page import = "model.UserBean" %>
    <%@ page import = "model.UserBean.tipoUtente" %>
@@ -58,9 +61,32 @@
       
       	<!-- Info del mio account utente -->
         <div id="infoAccount">
-			Username: <%= uBean.getUsername() %><br>
-			Email: <%= uBean.getEmail() %><br>
-			Password: <%= uBean.getPassword() %>
+        
+        	 <div class="row">
+        	 	<div class="form-group">
+                    <div class="col-md-6 mb-3">
+                    	
+                    	
+                        <label for="firstName" class="lb">Nome</label>
+                        <input name="nome" type="text" class="form-control" id="firstName" placeholder="Nome" value="<%= uBean.getUsername() %>" required>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="lastName">Cognome</label>
+                        <div class="input-group" id="show_hide_password">
+                        <input name="cognome" type="text" class="form-control" id="lastName" placeholder="Cognome" value="<%= uBean.getPassword() %>" required>
+                        <div class="input-group-addon">
+                        	<a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    </div>
+                   </div>
+                </div>
+        
+        
+        
+		
 		</div>
 		
 		<!-- Lista degli acquisti effettuati dall'utente -->
@@ -115,6 +141,24 @@
     	$("#destinazione").children(":visible").hide(); // nascondi l'elemento che in questo momento è visibile
     	$(sourceID).show(); // e mostra quello con id = sourceID
     }
+    
+    
+    $(document).ready(function() {
+        $("#show_hide_password a").on('click', function(event) {
+            event.preventDefault();
+            if($('#show_hide_password input').attr("type") == "text"){
+                $('#show_hide_password input').attr('type', 'password');
+                $('#show_hide_password i').addClass( "fa-eye-slash" );
+                $('#show_hide_password i').removeClass( "fa-eye" );
+            }else if($('#show_hide_password input').attr("type") == "password"){
+                $('#show_hide_password input').attr('type', 'text');
+                $('#show_hide_password i').removeClass( "fa-eye-slash" );
+                $('#show_hide_password i').addClass( "fa-eye" );
+            }
+        });
+    });
+    
+    
   </script>
 
 </body>

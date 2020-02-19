@@ -47,22 +47,30 @@
         <p class="h1 text-left mb-4">Catalogo giochi</p>
         <div class="row">
           <div class="col">
-              <%@ include file="product_card.jsp"%>
+              <jsp:include page="product_card.jsp">
+              	<jsp:param name="ID" value="1"/>
+              </jsp:include>
 
           </div>
           <div class="col">
-           <%@ include file="product_card.jsp"%>
+              <jsp:include page="product_card.jsp">
+              	<jsp:param name="ID" value="1"/>
+              </jsp:include>
 
           </div>
         </div>
 
         <div class="row">
           <div class="col">
-             <%@ include file="product_card.jsp"%>
+              <jsp:include page="product_card.jsp">
+              	<jsp:param name="ID" value="1"/>
+              </jsp:include>
 
           </div>
           <div class="col">
-              <%@ include file="product_card.jsp"%>
+              <jsp:include page="product_card.jsp">
+              	<jsp:param name="ID" value="2"/>
+              </jsp:include>
 
           </div>
         </div>
