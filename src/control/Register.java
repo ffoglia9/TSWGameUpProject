@@ -38,12 +38,13 @@ public class Register extends HttpServlet {
 		userData.put("developer", request.getParameter("developer"));
 		
 		System.out.println("userdata: "+userData);
-		UserBean user = UserBean.validate(userData); // ogni elemento di userData dovrebbe avere una regex associata.
-		System.out.println(user);
-		if(user == null) { // la validazione ha fallito
-			response.sendError(421, "Email sintatticamente invalida");
+		boolean valid = Validator.validate(userData); // ogni elemento di userData dovrebbe avere una regex associata.
+		System.out.println(valid);
+		if(!valid) { // la validazione ha fallito
+			response.sendError(421, "Dati non validi");
 			return;
 		}
+		UserBean user = new UserBean(userData);
 		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
 		UserDS userDB = new UserDS(ds);
 		BillDS fattDS = new BillDS(ds);
@@ -58,7 +59,7 @@ public class Register extends HttpServlet {
 			return;
 		}
 		request.getSession().setAttribute("userBean", user);
-		response.sendRedirect("index.jsp");
+		response.sendRedirect(response.encodeRedirectURL("index.jsp"));
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

@@ -92,5 +92,18 @@ abstract public class Validator {
 		}
 	}
 	
+	/**
+	 *  @param HashMap contenente i parametri che hanno bisogno di validazione prima di essere settati
+	 */
+	static public boolean validate(HashMap<String, String> data) { // Attenzione: il validatore ritorna true anche se una key di userData non ha una rispettiva regex! Si assume che tale parametro non viene usato o non richiede validazione.
+		for(String i : data.keySet()) {
+			System.out.println("checking "+i+ " with value "+data.get(i));
+			if(!Validator.matches(i, data.get(i))) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	
 }

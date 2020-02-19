@@ -131,24 +131,6 @@ public class UserBean {
 		this.password = password;
 	}
 	
-	/**
-	 *  @param HashMap contenente i parametri dell'utente che hanno bisogno di validazione prima di essere settati
-	 */
-	public static UserBean validate(HashMap<String, String> userData) { // Attenzione: il validatore ritorna true anche se una key di userData non ha una rispettiva regex! Si assume che tale parametro non viene usato o non richiede validazione.
-		boolean pass = true;
-		for(String i : userData.keySet()) {
-			System.out.println("checking "+i+ " with value "+userData.get(i));
-			if(!Validator.matches(i, userData.get(i))) {
-				pass = false;
-				break;
-			}
-		}
-		if(pass) {
-			return new UserBean(userData);
-		} else {
-			return null;
-		}
-	}
 	@Override
 	public String toString() {
 		return "UserBean [userID=" + userID + ", username=" + username + ", email=" + email + ", password=" + password

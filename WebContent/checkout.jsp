@@ -216,6 +216,7 @@
 
 <script>
         // Render the PayPal button into #paypal-button-container
+        $( document ).ready(function() {
         paypal.Buttons({
 
             // Set up the transaction
@@ -239,6 +240,7 @@
 
 
         }).render('#paypal-button-container');
+        }
     </script>
 
 	<script

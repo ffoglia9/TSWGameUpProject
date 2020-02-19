@@ -249,7 +249,7 @@ public class UserDS implements DataAccessModel<UserBean> {
 		PreparedStatement preparedStatement = null;
 		int result = 0;
 
-		String updateSQL = "UPDATE " + UserDS.TABLE_NAME + " (Username, Password, Tipo_Utente, Email) VALUES (?, ?, ?, ?) WHERE ID_Utente = ?";
+		String updateSQL = "UPDATE " + UserDS.TABLE_NAME + " SET Username = ?, Password = ?, Tipo_Utente = ?, Email = ? WHERE ID_Utente = ?";
 
 		try {
 			connection = ds.getConnection();

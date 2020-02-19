@@ -20,7 +20,7 @@ import model.UserBean.tipoUtente;
 /**
  * Servlet Filter implementation class Auth
  */
-@WebFilter(urlPatterns = {"/checkout.jsp", "/pannello_utente.jsp"}) // Aggiungere pannello utente
+@WebFilter(urlPatterns = {"/checkout.jsp", "/pannello_utente.jsp", "/ModificaInfo"}) // Aggiungere pannello utente
 public class Auth implements Filter {
 	HashMap<String, tipoUtente> permissionsMap;
     /**

@@ -19,8 +19,14 @@
   
    <%@ page import = "model.UserBean" %>
    <%@ page import = "model.UserBean.tipoUtente" %>
+   <%@ page import = "model.BillDS" %>
+   <%@ page import = "model.BillBean" %>
+   <%@ page import = "javax.sql.DataSource" %>
    <% 
      UserBean uBean = (UserBean) request.getSession().getAttribute("userBean");
+	 DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
+	 BillDS bds = new BillDS(ds);
+	 BillBean lastBill = bds.doRetrieveByUserID(uBean.getUserID());
 	 tipoUtente userType = uBean.getUserType();
    %>
 
@@ -62,12 +68,12 @@
       
       	<!-- Info del mio account utente -->
         <div id="infoAccount">
-        
+        	<form action="ModificaInfo" method="POST">
         	 <div class="row">
         	 	
                    <div class="col-md-6 mb-3">
                        <label for="username" class="lb">Username</label>
-                       <input name="nome" type="text" class="form-control" id="firstName" value="<%= uBean.getUsername() %>" readonly>
+                       <input name="username" type="text" class="form-control" id="username" value="<%= uBean.getUsername() %>">
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="lastName">Password</label>
@@ -84,17 +90,20 @@
                 <div class="row">
                 	<div class="col-md-6 mb-3">
                 		<label for="Email" class="lb">Email</label>
-                       <input name="nome" type="text" class="form-control" id="email" value="<%= uBean.getEmail() %>" readonly>
+                       <input name="email" type="text" class="form-control" id="email" value="<%= uBean.getEmail() %>">
                 	</div>
                 	
                 	<div class="col-md-6 mb-3">
                 		<label for="developer">Sei uno sviluppatore?<span class="text-muted"></span></label><br>
                     	<div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        	<label class="btn btn-secondary ">
-                            	<input type="radio" name="developer" id="developeryes" value="<%= uBean.getUserTypeID() %>" autocomplete="off" > SI
+                        	<label class="btn btn-secondary <% if(uBean.getUserTypeID().equals("1")) { %> focus active <% } %>">
+                            	<input type="radio" name="developer" id="developeryes" value="1" autocomplete="off" <%
+                            		if(uBean.getUserTypeID().equals("1")) { %> checked <% } %>> SI
+                            	
                         	</label>
-                        	<label class="btn btn-secondary active">
-                            	<input type="radio" name="developer" id="developerno" value="<%= uBean.getUserTypeID() %>" autocomplete="off"> NO
+                        	<label class="btn btn-secondary <% if(uBean.getUserTypeID().equals("0")) { %> focus active <% } %>">
+                            	<input type="radio" name="developer" id="developerno" value="0" autocomplete="off" <%
+                            		if(uBean.getUserTypeID().equals("0")) { %> checked <% } %>> NO
                         	</label>
                     	</div>
                     </div>
@@ -109,27 +118,27 @@
                 	
                 	<div class="col-md-6 mb-3">
                 		<label for="nome" class="lb">Nome</label>
-                       <input name="nome" type="text" class="form-control" id="nome" value="<%= %>" readonly>
+                       <input name="nome" type="text" class="form-control" id="nome" value="<%= lastBill != null ? lastBill.getName() : "" %>">
                 	</div>
                 	
                 	<div class="col-md-6 mb-3">
                 		<label for="cognome" class="lb">Cognome</label>
-                       <input name="cognome" type="text" class="form-control" id="cognome" value="<%= uBean.getEmail() %>" readonly>
+                       <input name="cognome" type="text" class="form-control" id="cognome" value="<%= lastBill != null ? lastBill.getSurname() : "" %>">
                 	</div>
                 	
                 	<div class="col-md-6 mb-3">
-                		<label for="via" class="lb">Via e numero civico</label>
-                       <input name="via" type="text" class="form-control" id="via" value="<%= uBean.getEmail() %>" readonly>
+                		<label for="indirizzo" class="lb">Via e numero civico</label>
+                       <input name="indirizzo" type="text" class="form-control" id="indirizzo" value="<%= lastBill != null ? lastBill.getAddress() : "" %>">
                 	</div>
                 	
                 	<div class="col-md-6 mb-3">
                 		<label for="cap" class="lb">CAP</label>
-                       <input name="cap" type="text" class="form-control" id="cap" value="<%= uBean.getEmail() %>" readonly>
+                       <input name="cap" type="text" class="form-control" id="cap" value="<%= lastBill != null ? lastBill.getCAP() : "" %>">
                 	</div>
                 	
                 	<div class="col-md-6 mb-5">
-                		<label for="city" class="lb">Città</label>
-                       <input name="city" type="text" class="form-control" id="city" value="<%= uBean.getEmail() %>" readonly>
+                		<label for="citta" class="lb">Città</label>
+                       <input name="citta" type="text" class="form-control" id="citta" value="<%= lastBill != null ? lastBill.getCity() : "" %>">
                 	</div>
                 	
                 
@@ -147,7 +156,7 @@
                 
                 
                 </div>
-                      
+                </form>
              </div>
         
         

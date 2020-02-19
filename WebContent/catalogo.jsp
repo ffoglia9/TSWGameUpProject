@@ -84,37 +84,39 @@
       <div class="container">
         <p class="h1 text-left mb-4">Catalogo giochi</p>
         <%
-        	int count = 0;
-        	for(GameBean gb : allGames) {
-        		if(count % 2 == 0) {
+        	GameBean gb;
+        	while(allGames.size() > 2) { gb = allGames.remove(0);
        	%>
        				<div class="row">
-       	<% } %>
        	  <div class="col">
               <jsp:include page="product_card.jsp">
               	<jsp:param name="ID" value="<%= gb.getCode() %>"/>
               </jsp:include>
           </div>
-        <% 		if(count % 2 == 1) { %>
-        	</div>
-        <%
-        		}
-        		count++;
-        	}
-        	if(count % 2 == 0) {
-        %>
-        	</div>
-        <%	
-        	}
-        %>
+          <% gb = allGames.remove(0); %>
+          <div class="col">
+              <jsp:include page="product_card.jsp">
+              	<jsp:param name="ID" value="<%= gb.getCode() %>"/>
+              </jsp:include>
+          </div>
+          </div>
+          <% } %>
+          <% if(!allGames.isEmpty()) { gb = allGames.remove(0); %>
+          		<div class="row">
+       	  <div class="col">
+              <jsp:include page="product_card.jsp">
+              	<jsp:param name="ID" value="<%= gb.getCode() %>"/>
+              </jsp:include>
+          </div>
+          </div>
+          <% } %>
+
       </div>
     </div>
     <!-- /#page-content-wrapper -->
-
-  </div>
+</div>
   <!-- /#wrapper -->
-
-   <%@ include file="footer.jsp"%>
+<%@ include file="footer.jsp"%>
 
   <!-- Menu Toggle Script -->
   <script>
@@ -123,7 +125,6 @@
       $("#wrapper").toggleClass("toggled");
     });
   </script>
-
 </body>
 
 </html>
