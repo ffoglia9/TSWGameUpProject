@@ -13,25 +13,63 @@
 
   <!-- Custom styles for this template -->
   <link href="css/catalogo.css" rel="stylesheet">
-
+  <%@ page import = "model.GameDS" %>
+  <%@ page import = "model.GameBean" %>
+  <%@ page import = "javax.sql.DataSource" %>
+  <%@ page import = "java.util.ArrayList" %>
 
 </head>
 
 
 <body>
-
+	<%
+		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
+		GameDS gameDS = new GameDS(ds);
+		ArrayList<GameBean> allGames;
+		String action = request.getParameter("list");
+		if(action == null) { // controlla se l'utente ha provato a cercare un titolo
+			String title = request.getParameter("title");
+			if(title == null) // mostra tutti i possibili giochi nel caso default
+				allGames = (ArrayList<GameBean>) gameDS.doRetrieveAll("Valutazione");
+			else { // l'utente sta provando a cercare un titolo
+				allGames = (ArrayList<GameBean>) gameDS.doRetrieveByTitle(title);
+			}
+		}
+		else {
+			switch(action) {
+			case "Action":
+				allGames = (ArrayList<GameBean>) gameDS.doRetrieveByGenre("Action");
+				break;
+			case "RTS":
+				allGames = (ArrayList<GameBean>) gameDS.doRetrieveByGenre("RTS");
+				break;
+			case "Adventure":
+				allGames = (ArrayList<GameBean>) gameDS.doRetrieveByGenre("Adventure");
+				break;
+			case "Puzzle":
+				allGames = (ArrayList<GameBean>) gameDS.doRetrieveByGenre("Puzzle");
+				break;
+			case "Arcade":
+				allGames = (ArrayList<GameBean>) gameDS.doRetrieveByGenre("Arcade");
+				break;
+			default: // comprende il caso all
+				allGames = (ArrayList<GameBean>) gameDS.doRetrieveAll("Valutazione");
+				break;
+			}
+		}
+	%>
   <div class="d-flex" id="wrapper">
 
     <!-- Sidebar -->
     <div class=" border-right" id="sidebar-wrapper">
       <div class="sidebar-heading">Start Bootstrap </div>
       <div class="list-group list-group-flush">
-        <a href="#" class="list-group-item list-group-item-action ">Dashboard</a>
-        <a href="#" class="list-group-item list-group-item-action ">Shortcuts</a>
-        <a href="#" class="list-group-item list-group-item-action ">Overview</a>
-        <a href="#" class="list-group-item list-group-item-action ">Events</a>
-        <a href="#" class="list-group-item list-group-item-action ">Profile</a>
-        <a href="#" class="list-group-item list-group-item-action ">Status</a>
+        <a href="?list=all" class="list-group-item list-group-item-action ">Tutti i giochi</a>
+        <a href="?list=Action" class="list-group-item list-group-item-action ">Action</a>
+        <a href="?list=RTS" class="list-group-item list-group-item-action ">RTS</a>
+        <a href="?list=Adventure" class="list-group-item list-group-item-action ">Adventure</a>
+        <a href="?list=Puzzle" class="list-group-item list-group-item-action ">Puzzle</a>
+        <a href="?list=Arcade" class="list-group-item list-group-item-action ">Arcade</a>
       </div>
     </div>
     <!-- /#sidebar-wrapper -->
@@ -45,35 +83,30 @@
 
       <div class="container">
         <p class="h1 text-left mb-4">Catalogo giochi</p>
-        <div class="row">
-          <div class="col">
+        <%
+        	int count = 0;
+        	for(GameBean gb : allGames) {
+        		if(count % 2 == 0) {
+       	%>
+       				<div class="row">
+       	<% } %>
+       	  <div class="col">
               <jsp:include page="product_card.jsp">
-              	<jsp:param name="ID" value="1"/>
+              	<jsp:param name="ID" value="<%= gb.getCode() %>"/>
               </jsp:include>
-
           </div>
-          <div class="col">
-              <jsp:include page="product_card.jsp">
-              	<jsp:param name="ID" value="1"/>
-              </jsp:include>
-
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col">
-              <jsp:include page="product_card.jsp">
-              	<jsp:param name="ID" value="1"/>
-              </jsp:include>
-
-          </div>
-          <div class="col">
-              <jsp:include page="product_card.jsp">
-              	<jsp:param name="ID" value="2"/>
-              </jsp:include>
-
-          </div>
-        </div>
+        <% 		if(count % 2 == 1) { %>
+        	</div>
+        <%
+        		}
+        		count++;
+        	}
+        	if(count % 2 == 0) {
+        %>
+        	</div>
+        <%	
+        	}
+        %>
       </div>
     </div>
     <!-- /#page-content-wrapper -->

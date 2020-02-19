@@ -30,8 +30,8 @@
       </ul>
 
  	 
-    <form class=" form-inline d-none d-sm-block d-md-none d-lg-block mr-auto ml-auto w-75 ">
-        <input class="form-control mr-sm-1 w-75" type="text" placeholder="Search">   
+    <form action="./catalogo.jsp" method="GET" class=" form-inline d-none d-sm-block d-md-none d-lg-block mr-auto ml-auto w-75 ">
+        <input name="title" class="form-control mr-sm-1 w-75" type="text" placeholder="Search">   
         <span class="input-group-btn ">
         <button class="btn btn-default" type="button">
             <i class="fa fa-sm fa-search" aria-hidden="true"></i>
