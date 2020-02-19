@@ -34,9 +34,6 @@
     	BillBean lastBill = bds.doRetrieveByUserID(uBean.getUserID());
 	%>
 	
-	
-	
-	<div id="paypal-button-container"></div>
 
 <div class="container">
     <div class="py-5 text-center">
@@ -212,53 +209,34 @@
     
 </div>
 
-
-
-<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+<div id="paypal-button-container"></div>
+<script src="https://www.paypal.com/sdk/js?client-id=sb&currency=EUR" data-sdk-integration-source="button-factory"></script>
 <script>
-  paypal.Button.render({
-    // Configure environment
-    env: 'sandbox',
-    client: {
-      sandbox: 'demo_sandbox_client_id',
-      production: 'demo_production_client_id'
-    },
-    // Customize button (optional)
-    locale: 'en_US',
-    style: {
-      size: 'small',
-      color: 'gold',
-      shape: 'pill',
-    },
-
-    // Enable Pay Now checkout flow (optional)
-    commit: true,
-
-    // Set up a payment
-    payment: function(data, actions) {
-      return actions.payment.create({
-        transactions: [{
-          amount: {
-            total: '0.01',
-            currency: 'USD'
-          }
-        }]
-      });
-    },
-    // Execute the payment
-    onAuthorize: function(data, actions) {
-      return actions.payment.execute().then(function() {
-        // Show a confirmation message to the buyer
-        window.alert('Thank you for your purchase!');
-      });
-    }
-  }, '#paypal-button-container');
-
+    paypal.Buttons({
+        style: {
+            shape: 'pill',
+            color: 'black',
+            layout: 'vertical',
+            label: 'pay',
+            
+        },
+        createOrder: function(data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: '1'
+                    }
+                }]
+            });
+        },
+        onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+                alert('Transaction completed by ' + details.payer.name.given_name + '!');
+            });
+        }
+    }).render('#paypal-button-container');
 </script>
 
-	<script
-		src="https://www.paypal.com/sdk/js?client-id=Ad2cJIlZoF_6MquMvgkkQETkQyn7QQxlxicghzoXdu8-Za0VtWYWK4-OFjKs4t9HMlN6WrkfDWzM_YuW"> // Required. Replace SB_CLIENT_ID with your sandbox client ID.
-	</script>
 
 <!-- FOOTER -->
 <%@ include file="footer.jsp"%>
