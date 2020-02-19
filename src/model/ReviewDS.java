@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Collection;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import model.GameDS;
 import javax.sql.DataSource;
 
@@ -88,6 +88,7 @@ public class ReviewDS implements DataAccessModel<ReviewBean>{
 			
 			if(rs.next()) {
 						bean = new ReviewBean(
+						rs.getInt(code),
 						rs.getBoolean("Consigliato"),
 						rs.getString("Opinione"),
 						rs.getInt("ID_Gioco"),
@@ -140,7 +141,7 @@ public class ReviewDS implements DataAccessModel<ReviewBean>{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		Collection<ReviewBean> reviews = new LinkedList<ReviewBean>();
+		Collection<ReviewBean> reviews = new ArrayList<ReviewBean>();
 
 		String selectSQL = "SELECT * FROM " + ReviewDS.TABLE_NAME;
 
@@ -156,6 +157,7 @@ public class ReviewDS implements DataAccessModel<ReviewBean>{
 
 			while (rs.next()) {
 					ReviewBean bean = new ReviewBean(
+					rs.getInt("ID_Recensione"),
 					rs.getBoolean("Consigliato"),
 					rs.getString("Opinione"),
 					rs.getInt("ID_Gioco"),
@@ -216,7 +218,7 @@ public class ReviewDS implements DataAccessModel<ReviewBean>{
 		PreparedStatement preparedStatement = null;
 		
 		String selectSQL = "SELECT * FROM " + ReviewDS.TABLE_NAME + " WHERE ID_Gioco = ?";
-		Collection<ReviewBean> reviews = new LinkedList<ReviewBean>();
+		Collection<ReviewBean> reviews = new ArrayList<ReviewBean>();
 		
 		
 		try {
@@ -228,6 +230,7 @@ public class ReviewDS implements DataAccessModel<ReviewBean>{
 
 			while (rs.next()) {
 					ReviewBean bean = new ReviewBean(
+					rs.getInt("ID_Recensione"),
 					rs.getBoolean("Consigliato"),
 					rs.getString("Opinione"),
 					rs.getInt("ID_Gioco"),
