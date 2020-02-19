@@ -28,7 +28,7 @@ public class GameDS implements DataAccessModel<GameBean> {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
-		String insertSQL = "INSERT INTO " + GameDS.TABLE_NAME + " (Titolo, Descrizione, Immagine, Prezzo, Sconto, Genere, ID_Utente, Approvato, Icona) "
+		String insertSQL = "INSERT INTO " + GameDS.TABLE_NAME + " (Titolo, Descrizione, Immagine, Prezzo, Sconto, Genere, ID_Utente, Approvato, Icon) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
