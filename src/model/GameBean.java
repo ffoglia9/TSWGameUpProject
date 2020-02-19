@@ -23,7 +23,7 @@ public class GameBean implements Serializable {
 	String genere; 
 	enum Genere {
 		Action,
-		RTS,
+		FPS,
 		Adventure,
 		Puzzle,
 		Arcade
@@ -38,6 +38,15 @@ public class GameBean implements Serializable {
 		reviews = new ArrayList<ReviewBean>();
 		sponsorID = -1;
 		sconto = 0;
+	}
+	
+	public GameBean(String title, String description, double price, String img, String icon, String genere) {
+		this.title = title;
+		this.description = description;
+		this.price = price;
+		this.img = img;
+		this.icon = icon;
+		this.genere = genere;
 	}
 
 	public int getCode() {
