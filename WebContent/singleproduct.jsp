@@ -149,21 +149,21 @@
 			    		console.log("TEST2");
 			    		$.post("CartManager", 
 			    				{ID: <%= gb.getCode() %>},
+			    				async: false,
 			    				function(data) {
 			    					$("#errorLogin").text(data);
 			    				}
-			    		)
+			    		);
+			    		location.reload(force);
 			    	})
 			    });
 			    
 			    $(function() {
 		            $( "#datepicker" ).datepicker();
-		            $( "#datepicker" ).datepicker("show");
 		         });
 			    
 			    $(function() {
 		            $( "#datepicker1" ).datepicker();
-		            $( "#datepicker1" ).datepicker("show");
 		         });
 			    
 			    

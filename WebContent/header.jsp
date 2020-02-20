@@ -25,7 +25,7 @@
           <a class="nav-link" href="index.jsp">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Pubblica il tuo gioco</a>
+          <a class="nav-link" href="catalogo.jsp">Catalogo</a>
         </li>
       </ul>
 

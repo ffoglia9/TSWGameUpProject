@@ -20,7 +20,7 @@
 				<h5 class="card-title"><%= gBean.getTitle() %></h5>
 				<p class="card-text"><%= gBean.getDescription() %></p> 
 				<button type="button" class="btn btn-primary btn-sm"
-					onclick="window.location.href = 'singleproduct.jsp'"><%= gBean.getPrice() %>
+					onclick="window.location.href = 'singleproduct.jsp?ID=<%= gBean.getCode() %>'"><%= gBean.getPrice() %>
 					&euro;</button>
 			</div>
 		</div>

@@ -25,6 +25,10 @@ public class Cart {
  	}
 	
 	
+	public List<GameBean> getGames() {
+		return games;
+	}
+
 	//metodo per ottenere il prezzo totale dei prodotti inseriti nel carrello
 	public double getTotal() {
 		

@@ -29,6 +29,7 @@ public class CartManager extends HttpServlet {
 			DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
 			GameDS gameDS = new GameDS(ds);
 			GameBean gb = gameDS.doRetrieveByKey(gameID);
+			System.out.println("OK " + gameID);
 			if(gb != null){
 				
 				HttpSession session = request.getSession();

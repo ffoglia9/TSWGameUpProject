@@ -26,12 +26,20 @@
 	<%@ page import = "model.UserBean.tipoUtente" %>
 	<%@ page import = "model.BillDS" %>
 	<%@ page import = "model.BillBean" %>
+	<%@ page import = "model.Cart" %>
+	<%@ page import = "model.GameBean" %>
+	<%@ page import = "java.util.ArrayList" %>
 	<%@ page import = "javax.sql.DataSource" %>
 	<%
 		UserBean uBean = (UserBean) request.getSession().getAttribute("userBean");
     	DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
     	BillDS bds = new BillDS(ds);
     	BillBean lastBill = bds.doRetrieveByUserID(uBean.getUserID());
+    	Cart cart = (Cart) request.getSession().getAttribute("ShoppingCart");
+    	if(cart == null) {
+    		response.sendRedirect(response.encodeRedirectURL("index.jsp")); // Non andare in questa jsp se il carrello è vuoto
+    		return;
+    	}
 	%>
 	
 
@@ -45,30 +53,21 @@
         <div class="col-md-4 order-md-2 mb-4">
             <h4 class="d-flex justify-content-between align-items-center mb-3">
                 <span class="h3">Il tuo carrello</span>
-                <span class="badge badge-secondary badge-pill">3</span>
+                <span class="badge badge-secondary badge-pill"><%= cart.getAmountOfGames() %></span>
             </h4>
             <ul class="list-group mb-3">
+            	<% ArrayList<GameBean> games = (ArrayList<GameBean>) cart.getGames(); 
+            		for(GameBean gBean : games) {
+            	%>
+            
                 <li class="list-group-item d-flex justify-content-between lh-condensed">
                     <div>
-                        <h6 class="my-0">Product name</h6>
-                        <small class="text-muted">Brief description</small>
+                        <h6 class="my-0"><%= gBean.getTitle() %></h6>
+                        <small class="text-muted"><%= gBean.getShortDescription() %></small>
                     </div>
-                    <span class="text-muted">$12</span>
+                    <span class="text-muted">&euro; <%= gBean.getPrice() %></span>
                 </li>
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">Second product</h6>
-                        <small class="text-muted">Brief description</small>
-                    </div>
-                    <span class="text-muted">$8</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">Third item</h6>
-                        <small class="text-muted">Brief description</small>
-                    </div>
-                    <span class="text-muted">$5</span>
-                </li>
+                <% } %>
                 <li class="list-group-item d-flex justify-content-between bg-light">
                     <div class="text-success">
                         <h6 class="my-0">Hai un codice sconto?</h6>
@@ -77,8 +76,8 @@
                     <span class="text-success">-$5</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between">
-                    <span>Total (USD)</span>
-                    <strong>$20</strong>
+                    <span>Total (EUR)</span>
+                    <strong>&euro;<%= cart.getTotal() %></strong>
                 </li>
             </ul>
 
@@ -174,10 +173,26 @@
             return actions.order.create({
                 purchase_units: [{
                     amount: {
-                        value: '1'
+                        value: '<%= cart.getTotal() %>',
+                        	breakdown: {
+                                item_total: {value: '<%= cart.getTotal() %>',
+                                	currency_code: 'EUR'}
+                            }
+                    },
+                    items: [
+                    	<%
+                    		for(GameBean gb : cart.getGames()) {
+                    			%>
+                    			{name: "<%= gb.getTitle() %>",
+                    			unit_amount: {value: "<%= gb.getPrice() %>", 
+                    				currency_code: 'EUR'},
+                    			quantity: '1'},
+                    			<%
+                    		}
+                    	%>
+                    ]
                     }
-                }]
-            });
+            ]});
         },
         onApprove: function(data, actions) {
             return actions.order.capture().then(function(details) {
