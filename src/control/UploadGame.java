@@ -18,6 +18,7 @@ import javax.sql.DataSource;
 
 import model.GameBean;
 import model.GameDS;
+import model.UserBean;
 import model.UserDS;
 
 @WebServlet("/upload")
@@ -32,9 +33,10 @@ public class UploadGame extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//PrintWriter out = response.getWriter();
+		PrintWriter out = response.getWriter();
 		
 		String savePath = "C:\\Users\\giuse\\OneDrive\\Desktop\\AppImages";
+		//String savePath = "AppImages";
 		
 	    String title = request.getParameter("title");
 	    String desc = request.getParameter("descGioco");
@@ -43,13 +45,13 @@ public class UploadGame extends HttpServlet {
 	  //Upload della cover
 	    Part filePart = request.getPart("cover"); // Retrieves <input type="file" name="cover">
 	    String coverFileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); 
-	    //InputStream fileContent = filePart.getInputStream();
+	    InputStream fileContent = filePart.getInputStream();
 	    filePart.write(savePath + File.separator + coverFileName);
 	    
 	  //Upload dell'icon
 	    Part filePart1 = request.getPart("icon"); // Retrieves <input type="file" name="icon">
 	    String iconFileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); 
-	    //InputStream fileContent1 = filePart.getInputStream();
+	    InputStream fileContent1 = filePart.getInputStream();
 	    filePart1.write(savePath + File.separator + iconFileName);
 	    
 	    double price = Double.parseDouble(request.getParameter("price"));
@@ -68,15 +70,22 @@ public class UploadGame extends HttpServlet {
     			break;
 	    }
 	    
-	    GameBean gb = new GameBean(title, desc, price, coverFileName, iconFileName, selectedCategory);
+	    UserBean ub = (UserBean) request.getSession().getAttribute("userBean");
+	    
+	    
+	    GameBean gb = new GameBean(title, desc, price, coverFileName, iconFileName, selectedCategory, ub.getUserID());
 	    DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
 		GameDS gameDS = new GameDS(ds);
 		
 		try {
 			gameDS.doSave(gb);
+			response.sendRedirect(response.encodeRedirectURL("pannello_utente.jsp"));
+
 		} catch(SQLException e) {
 			System.out.println("Error:" + e.getMessage());
 			response.sendError(500);
 		}
+		
+		
 	}
 }

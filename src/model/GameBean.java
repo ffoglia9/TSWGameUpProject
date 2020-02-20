@@ -41,13 +41,14 @@ public class GameBean implements Serializable {
 		sconto = 0;
 	}
 	
-	public GameBean(String title, String description, double price, String img, String icon, String genere) {
+	public GameBean(String title, String description, double price, String img, String icon, String genere, int userid) {
 		this.title = title;
 		this.description = description;
 		this.price = price;
 		this.img = img;
 		this.icon = icon;
 		this.genere = genere;
+		this.userID = userid;
 	}
 
 	public int getCode() {
@@ -73,6 +74,11 @@ public class GameBean implements Serializable {
 	public String getShortDescription() {
 		
 		String shortDesc;
+		
+		if(this.description.length() < 101) {
+			return this.description;
+		}
+		
 		shortDesc = this.description.substring(0, 101);
 		if(this.description.length() > shortDesc.length())
 			shortDesc = shortDesc.concat("...");
