@@ -104,12 +104,12 @@
 		
 		for(GameBean gb : allGames){
 			
-			valutazioni[i] = reviewDS.valutazione(gb.getCode());
-			gb.setValutazione(valutazioni[i]);
+			//valutazioni[i] = reviewDS.valutazione(gb.getCode());
+			//gb.setValutazione(valutazioni[i]);
 			i++;
 		}
 		
-		Arrays.sort(valutazioni);
+		//Arrays.sort(valutazioni);
 			
 		int best4Games[] = null;
 			
