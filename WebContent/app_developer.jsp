@@ -16,12 +16,12 @@
 		<div class="col-md-8">
 			<div class="card-body">
 				<h5 class="card-title"><%= gBean.getTitle() %></h5>
-				<p class="card-text"><%= gBean.getDescription() %></p> <!-- Da cambiare con un metodo che ritorna max y chars -->
+				<p class="card-text"><%= gBean.getShortDescription() %></p> <!-- Da cambiare con un metodo che ritorna max y chars -->
 				<button type="button" class="btn btn-primary btn-sm">Modifica informazioni</button>
 			</div>
 			<div class="card-footer"> <!-- Data acquisto -->
-    			<span class="badge badge-warning">In attesa di approvazione</span>
-    			<span class="badge badge-success">Sponsorizzazione in attesa di approvazione</span>
+    			<% if(!gBean.isApproved()) { %><span class="badge badge-warning">In attesa di approvazione</span><% } %>
+    			<% if(gBean.isPendingSponsorReq()) { %><span class="badge badge-success">Sponsorizzazione in attesa di approvazione</span><% } %>
     			
   			</div>
 		</div>

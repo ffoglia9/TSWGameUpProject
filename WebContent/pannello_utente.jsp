@@ -182,7 +182,7 @@
 			
 			<%
 	        	TransazioneBean transazione;
-	        	while(transazioni.size() > 2) { transazione = transazioni.remove(0);
+	        	while(transazioni.size() > 1) { transazione = transazioni.remove(0);
 	       	%>
 	       				<div class="row">
 				       	  <div class="col">
@@ -221,25 +221,39 @@
         %>
 		<!--  Lista delle app sviluppate dall'utente -->
 		<div id="mieApp" style="display: none">
-			LISTA APP
-			FARE UN SELECT DI TUTTI I GIOCHI CON ID UTENTE DELL'UBEAN
+			<%
+	        	GameBean myBean;
+				// Lista giochi pending
+				 ArrayList<GameBean> myGames = (ArrayList<GameBean>) gds.doRetrieveByDeveloper(uBean.getUserID());
+				System.out.println(myGames.size());
+	        	while(myGames.size() > 1) { myBean = myGames.remove(0);
+	       	%>
+	       				<div class="row">
+				       	  <div class="col-md-12">
+				              <jsp:include page="app_developer.jsp">
+				              	<jsp:param name="ID" value="<%= myBean.getCode() %>"/>
+				              </jsp:include>
+				          </div>
+			          <% myBean = myGames.remove(0); %>
+			          <div class="col-md-12">
+			              <jsp:include page="app_developer.jsp">
+			              	<jsp:param name="ID" value="<%= myBean.getCode() %>"/>
+			              </jsp:include>
+			          </div>
+	          		</div>
+	          <% } %>
+	          <% if(!myGames.isEmpty()) { myBean = myGames.remove(0); %>
+	          		<div class="row">
+	       	  <div class="col-md-12">
+	              <jsp:include page="app_developer.jsp">
+	              	<jsp:param name="ID" value="<%= myBean.getCode() %>"/>
+	              </jsp:include>
+	          </div>
+	          </div>
+	          <% } %>
 			
-			<div class="row">
-				<div class="col-md-12">
-                	<jsp:include page="app_developer.jsp">
-              		<jsp:param name="ID" value="1"/>
-              		</jsp:include>
-                </div>
-                
-                <div class="col-md-12">
-                	<jsp:include page="app_developer.jsp">
-              		<jsp:param name="ID" value="1"/>
-              		</jsp:include>
-                </div>
 			
 			
-			
-		</div>
 		</div>
 		
 		
@@ -355,7 +369,7 @@
 	        	GameBean gBean;
 				// Lista giochi pending
 				 ArrayList<GameBean> pendingGames = (ArrayList<GameBean>) gds.doRetrieveAllPending();
-	        	while(pendingGames.size() > 2) { gBean = pendingGames.remove(0);
+	        	while(pendingGames.size() > 1) { gBean = pendingGames.remove(0);
 	       	%>
 	       				<div class="row">
 				       	  <div class="col">
@@ -391,7 +405,7 @@
 	        	GameBean gBeanSponsor;
 				// Lista giochi pending
 				 ArrayList<GameBean> pendingSponsorGames = (ArrayList<GameBean>) gds.doRetrievePendingSponsors();
-	        	while(pendingSponsorGames.size() > 2) { gBeanSponsor = pendingSponsorGames.remove(0);
+	        	while(pendingSponsorGames.size() > 1) { gBeanSponsor = pendingSponsorGames.remove(0);
 	       	%>
 	       				<div class="row">
 				       	  <div class="col">
@@ -423,7 +437,7 @@
 		<% } %>
 		</div>
       </div>
-    </div>
+      </div>
     <!-- /#page-content-wrapper -->
  
 

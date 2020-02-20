@@ -85,7 +85,7 @@
         <p class="h1 text-left mb-4">Catalogo giochi</p>
         <%
         	GameBean gb;
-        	while(allGames.size() > 2) { gb = allGames.remove(0);
+        	while(allGames.size() > 1) { gb = allGames.remove(0);
        	%>
        				<div class="row">
        	  <div class="col">
