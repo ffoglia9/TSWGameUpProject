@@ -91,7 +91,7 @@
 		            </div>
 
 
-					<form action = "sponsorship" method = "post">
+					
 					 <div class="card card-outline-secondary my-4 pb-4">
 		                <div class="card-header ml-3">
 		                    Richiedi sponsorizzazione gioco
@@ -102,7 +102,7 @@
 		                    <div class="col-md-6 mb-3">
                        			 <label for="inizio">Inizio</label>
                       			<div class="input-group">
-                        			<input  type="text" name="startDate" id="datepicker" class="form-control">
+                        			<input type="text" name="startDate" id="datepicker" class="form-control">
                          			<div class="input-group-append">
                          				<span class="input-group-text"><i class="fa fa-calendar"></i>
                          				</span>
@@ -121,12 +121,15 @@
                     				</div>
                     		</div>
 		                    
-		                    <button class="btn btn-primary btn-sm"> Invia richiesta </button>
+		                    <button id="richiediSponsor" type="button" class="btn btn-primary btn-sm"
+		                    onClick="$.post('requestSponsorship', {ID_Gioco: <%= gb.getCode() %>, PendingSponsor : 1, startDate : $('#datepicker').val(),
+		                     endDate: $('#datepicker1').val()}, 
+		                    function(data) {location.reload(true); })" > Invia richiesta </button>
 		                    
 		                    <!-- TODO aggiungere al button la chiamata ad un metodo che setta il campo liked (ReviewBean) su T/F  -->
 		
 		                </div>
-		                </form>
+		     
 		            </div>
 
 
