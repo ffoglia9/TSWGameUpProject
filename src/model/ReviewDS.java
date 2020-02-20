@@ -261,7 +261,7 @@ public class ReviewDS implements DataAccessModel<ReviewBean>{
 		PreparedStatement preparedStatement = null;
 		
 		
-		String selectConsigliatoSQL = "SELECT AVG(Consigliato) FROM " + ReviewDS.TABLE_NAME + " WHERE ID_Gioco = ?";
+		String selectConsigliatoSQL = "SELECT AVG(Consigliato) AS average FROM " + ReviewDS.TABLE_NAME + " WHERE ID_Gioco = ?";
 		
 		try {
 			connection = ds.getConnection();
@@ -270,7 +270,13 @@ public class ReviewDS implements DataAccessModel<ReviewBean>{
 			
 			ResultSet rs = preparedStatement.executeQuery();
 			
-			media = rs.getDouble(1);
+			
+			rs.next();
+			media = rs.getDouble("average");
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+			
 			
 		} finally {
 			try {
