@@ -37,6 +37,7 @@ CREATE TABLE IF NOT EXISTS `gioco` (
   `Approvato` tinyint(1) NOT NULL,
   `ID_Utente` int(11) NOT NULL,
   `Valutazione` int(3) DEFAULT 100,
+  `PendingSponsor` int(3) DEFAULT 0,
   KEY `ID_Sponsor` (`ID_Sponsor`),
   KEY `ID_Utente`(`ID_Utente`),
   PRIMARY KEY (`ID_Gioco`)
