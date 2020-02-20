@@ -221,7 +221,7 @@ public class BillDS implements DataAccessModel<BillBean> {
 		PreparedStatement preparedStatement = null;
 		int result = 0;
 
-		String updateSQL = "UPDATE " + BillDS.TABLE_NAME + " (Nome, Cognome, Email, Via, CAP, City) VALUES (?, ?, ?, ?, ?, ?) WHERE ID_Fatturazione = ?";
+		String updateSQL = "UPDATE " + BillDS.TABLE_NAME + " SET Nome = ?, Cognome = ?, Email = ?, Via = ?, CAP = ?, City = ? WHERE ID_Fatturazione = ?";
 
 		try {
 			connection = ds.getConnection();

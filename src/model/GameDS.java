@@ -205,7 +205,7 @@ public class GameDS implements DataAccessModel<GameBean> {
 		PreparedStatement preparedStatement = null;
 		int result = 0;
 
-		String updateSQL = "UPDATE " + GameDS.TABLE_NAME + " (Titolo, Descrizione, Immagine, Prezzo, ID_Sponsor, Sconto, Approvato, Icon) VALUES (?, ?, ?, ?, ?, ?, ?, ?) WHERE ID_Gioco = ?";
+		String updateSQL = "UPDATE " + GameDS.TABLE_NAME + " SET Titolo = ?, Descrizione = ?, Immagine = ?, Prezzo = ?, ID_Sponsor = ?, Sconto = ?, Approvato = ?, Icon = ?, PendingSponsor = ?) WHERE ID_Gioco = ?";
 
 		try {
 			connection = ds.getConnection();
@@ -218,8 +218,9 @@ public class GameDS implements DataAccessModel<GameBean> {
 			preparedStatement.setInt(6, game.getSconto());
 			preparedStatement.setBoolean(7, game.isApproved());
 			preparedStatement.setString(8, game.getIcon());
+			preparedStatement.setBoolean(9, game.isPendingSponsorReq());
 			//WHERE ID_GIOCO = ?
-			preparedStatement.setInt(9, game.getCode());
+			preparedStatement.setInt(10, game.getCode());
 			
 
 			result = preparedStatement.executeUpdate();
