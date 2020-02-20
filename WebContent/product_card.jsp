@@ -13,7 +13,7 @@
 	<div class="row ">
 		<div
 			class="col-md-4 my-auto img-hover-zoom img-hover-zoom--brightness">
-			<img src="img1.jpg" class="card-img shadow-lg align-middle" alt="...">
+			<img src="<%= gBean.getIcon() %>" class="card-img shadow-lg align-middle" alt="...">
 		</div>
 		<div class="col-md-8">
 			<div class="card-body">
