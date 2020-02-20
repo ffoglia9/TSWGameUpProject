@@ -59,7 +59,7 @@
 		                <div class="card-body">
 		                    <h3 class="card-title ml-3"> <%= gb.getTitle() %> </h3>
 		                    <p class="card-text ml-3"> <%= gb.getDescription() %> </p>
-		                    <button type="button" class="btn btn-primary btn-sm ml-3" id = "acquisto"> Acquista a &euro; 16,99 </button>
+		                    <button type="button" class="btn btn-primary btn-sm ml-3" id = "acquisto"> Acquista a &euro; <%= gb.getPrice() %> </button>
 		                    
 		                </div>
 		            </div>
@@ -91,7 +91,7 @@
 		            </div>
 
 
-					<form>
+					<form action = "sponsorship" method = "post">
 					 <div class="card card-outline-secondary my-4 pb-4">
 		                <div class="card-header ml-3">
 		                    Richiedi sponsorizzazione gioco
@@ -100,9 +100,9 @@
 		                    <h5>Inserisci una data di inizio e di fine</h5>
 		                    
 		                    <div class="col-md-6 mb-3">
-                       			 <label for="lastName">Inizio</label>
+                       			 <label for="inizio">Inizio</label>
                       			<div class="input-group">
-                        			<input  type="text" id="datepicker" class="form-control">
+                        			<input  type="text" name="startDate" id="datepicker" class="form-control">
                          			<div class="input-group-append">
                          				<span class="input-group-text"><i class="fa fa-calendar"></i>
                          				</span>
@@ -111,9 +111,9 @@
                     		</div>
                     
                       		<div class="col-md-6 mb-3">     
-                        		<label for="lastName">Fine</label>
+                        		<label for="fine">Fine</label>
                         			<div class="input-group">
-                        				<input  type="text" id="datepicker1" class="form-control">
+                        				<input  type="text" name="endDate" id="datepicker1" class="form-control">
                          			<div class="input-group-append">
                          				<span class="input-group-text"><i class="fa fa-calendar"></i>
                          				</span>
