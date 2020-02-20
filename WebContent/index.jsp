@@ -23,8 +23,14 @@
       }
     }
   </style>
-
   
+  <%@ page import = "model.GameDS" %>
+  <%@ page import = "model.GameBean" %>
+  <%@ page import = "model.ReviewDS" %>
+  <%@ page import = "javax.sql.DataSource" %>
+  <%@ page import = "java.util.ArrayList" %>
+  <%@ page import = "java.util.Arrays" %>
+
 </head>
 
 <body>
@@ -85,6 +91,31 @@
     <!-- Marketing messaging and featurettes
   ================================================== -->
     <!-- Wrap the rest of the page in another container to center all the content. -->
+    
+  
+    
+    <%
+		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
+		GameDS gameDS = new GameDS(ds);
+        ReviewDS reviewDS = new ReviewDS(ds);
+		ArrayList<GameBean> allGames = (ArrayList<GameBean>) gameDS.doRetrieveAll("Valutazione");
+		
+		int valutazioni[] = null, gameIDs[] = null, i = 0;
+		
+		for(GameBean gb : allGames){
+			
+			valutazioni[i] = reviewDS.valutazione(gb.getCode());
+			gb.setValutazione(valutazioni[i]);
+			i++;
+		}
+		
+		Arrays.sort(valutazioni);
+			
+		int best4Games[] = null;
+			
+		
+		
+		%>
 
     <div class="container">
       <hr class="horizontal-line" noshade>

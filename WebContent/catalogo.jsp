@@ -13,6 +13,7 @@
 
   <!-- Custom styles for this template -->
   <link href="css/catalogo.css" rel="stylesheet">
+  
   <%@ page import = "model.GameDS" %>
   <%@ page import = "model.GameBean" %>
   <%@ page import = "javax.sql.DataSource" %>
