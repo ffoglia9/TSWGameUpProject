@@ -19,6 +19,7 @@ public class GameBean implements Serializable {
 	int userID;
 	int sconto;
 	boolean approvato;
+	boolean pendingSponsorReq;
 	int valutazione;
 	String genere; 
 	enum Genere {
@@ -165,6 +166,14 @@ public class GameBean implements Serializable {
 
 	public void setValutazione(int valutazione) {
 		this.valutazione = valutazione;
+	}
+
+	public boolean isPendingSponsorReq() {
+		return pendingSponsorReq;
+	}
+
+	public void setPendingSponsorReq(boolean pendingSponsorReq) {
+		this.pendingSponsorReq = pendingSponsorReq;
 	}
 
 	//metodo helper per controllare se il genere inserito è corretto / presente / valido
