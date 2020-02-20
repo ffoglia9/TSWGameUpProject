@@ -16,15 +16,22 @@
 		<div class="col-md-8">
 			<div class="card-body">
 				<h5 class="card-title"><%= gBean.getTitle() %></h5>
-				<p class="card-text"><%= gBean.getDescription() %></p> <!-- Da cambiare con un metodo che ritorna max y chars -->
-				<button type="button" class="btn btn-primary btn-sm">Più informazioni</button>
+				<p class="card-text"><%= gBean.getShortDescription() %></p> <!-- Da cambiare con un metodo che ritorna max y chars -->
+				<a href="singleproduct.jsp?ID=<%= gBean.getCode() %>"><button type="button" class="btn btn-primary btn-sm">Più informazioni</button></a>
 			</div>
 			<div class="card-footer"> <!-- Data acquisto -->
-    			<button type="button" class="btn btn-primary btn-sm ml-auto mr-auto">Accetta<i class="ml-2 fa fa-check" aria-hidden="true"></i></button>
-    			<button type="button" class="btn btn-primary btn-sm ml-auto mr-auto">Rifiuta<i class="ml-2 fa fa-times" aria-hidden="true"></i></button>
+    			<button id="accettaGioco" type="button" class="btn btn-primary btn-sm ml-auto mr-auto"
+    					onclick="$.post('PendingGames', {ID_Gioco: <%= gBean.getCode() %>, Approvato: 1}, function(data) { location.reload(true); })"
+    			>Accetta<i class="ml-2 fa fa-check" aria-hidden="true"></i></button>
     			
-
-    			
+    			<button id="rifiutaGioco" type="button" class="btn btn-primary btn-sm ml-auto mr-auto"
+    					onclick="$.post('PendingGames', 
+        				{ID_Gioco: <%= gBean.getCode() %>, Approvato: 0},
+        				function(data) {
+        					location.reload(true);
+        				}
+        		)"
+    			>Rifiuta<i class="ml-2 fa fa-times" aria-hidden="true"></i></button>
   			</div>
 		</div>
 	</div>

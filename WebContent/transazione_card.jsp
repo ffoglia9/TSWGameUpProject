@@ -1,12 +1,16 @@
 <%@ page import = "javax.sql.DataSource" %>
-<%@ page import = "model.GameDS" %>
+<%@ page import = "model.TransazioneDS" %>
+<%@ page import = "model.TransazioneBean" %>
 <%@ page import = "model.GameBean" %>
+<%@ page import = "model.GameDS" %>
 
 <% 
 	int ID = Integer.parseInt(request.getParameter("ID"));
 	DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
-	GameDS gameDS = new GameDS(ds);
-	GameBean gBean = gameDS.doRetrieveByKey(ID); // Può ritornare null, ma in questo caso il problema non risiede qui e va risolto
+	TransazioneDS tds = new TransazioneDS(ds);
+	TransazioneBean tBean = tds.doRetrieveByKey(ID); // Può ritornare null, ma in questo caso il problema non risiede qui e va risolto
+	GameDS gds = new GameDS(ds);
+	GameBean gBean = gds.doRetrieveByKey(tBean.getID_gioco());
 %>
 
 <div class="card shadow-lg py-4 mb-3" style="max-width: 540px;">
@@ -18,11 +22,11 @@
 		<div class="col-md-8">
 			<div class="card-body">
 				<h5 class="card-title"><%= gBean.getTitle() %></h5>
-				<p class="card-text"><%= gBean.getShortDescription() %></p> <!-- Da cambiare con un metodo che ritorna max y chars -->
-				<button type="button" class="btn btn-primary btn-sm">Più informazioni</button>
+				<p class="card-text"><%= gBean.getShortDescription() %></p>
+				<a href="singleproduct.jsp?ID=<%= gBean.getCode() %>"><button type="button" class="btn btn-primary btn-sm">Più informazioni</button></a>
 			</div>
 			<div class="card-footer"> <!-- Data acquisto -->
-    			<p>Acquistato il 15/06/2019</p> //Prendere data dinamicamente
+    			<p>Acquistato il <%= tBean.getData().toString() %></p>
   			</div>
 		</div>
 	</div>

@@ -151,56 +151,7 @@
 
                 <h4 class="mb-3">Metodo di pagamento</h4>
 
-                <div class="d-block my-3">
-                    <div class="custom-control custom-radio">
-                        <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
-                        <label class="custom-control-label" for="credit">Credit card</label>
-                    </div>
-                    <div class="custom-control custom-radio">
-                        <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
-                        <label class="custom-control-label" for="debit">Debit card</label>
-                    </div>
-                    <div class="custom-control custom-radio">
-                        <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
-                        <label class="custom-control-label" for="paypal">PayPal</label>
-                    </div>
-                    
-                </div>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="cc-name">Intestatario della carta</label>
-                        <input type="text" class="form-control" id="cc-name" placeholder="" required>
-                        <small class="text-muted">Full name as displayed on card</small>
-                        <div class="invalid-feedback">
-                            Name on card is required
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="cc-number">Numero carta</label>
-                        <input type="text" class="form-control" id="cc-number" placeholder="" required>
-                        <div class="invalid-feedback">
-                            Credit card number is required
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3 mb-3">
-                        <label for="cc-expiration">Data di scadenza</label>
-                        <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
-                        <div class="invalid-feedback">
-                            Expiration date required
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label for="cc-cvv">CVV</label>
-                        <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
-                        <div class="invalid-feedback">
-                            Security code required
-                        </div>
-                    </div>
-                </div>
-                <hr class="mb-4">
-                <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+                <div id="paypal-button-container"></div>
             </form>
         </div>
     </div>
@@ -209,13 +160,12 @@
     
 </div>
 
-<div id="paypal-button-container"></div>
 <script src="https://www.paypal.com/sdk/js?client-id=Ad2cJIlZoF_6MquMvgkkQETkQyn7QQxlxicghzoXdu8-Za0VtWYWK4-OFjKs4t9HMlN6WrkfDWzM_YuW&currency=EUR" data-sdk-integration-source="button-factory"></script>
 <script>
     paypal.Buttons({
         style: {
             shape: 'pill',
-            color: 'black',
+            color: 'blue',
             layout: 'vertical',
             label: 'pay',
             
@@ -231,7 +181,7 @@
         },
         onApprove: function(data, actions) {
             return actions.order.capture().then(function(details) {
-                alert('Transaction completed by ' + details.payer.name.given_name + '!');
+                alert('Il pagamento è andato a buon fine da ' + details.payer.name.given_name + '!');
             });
         }
     }).render('#paypal-button-container');

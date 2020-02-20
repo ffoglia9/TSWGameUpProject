@@ -174,4 +174,42 @@ public class TransazioneDS implements DataAccessModel<TransazioneBean>{
 		return false; // Le transazioni sono statiche
 	}
 
+
+	public synchronized Collection<TransazioneBean> doRetrieveAllByUserID(int ID_utente) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		Collection<TransazioneBean> transazioni = new ArrayList<TransazioneBean>();
+
+		String selectSQL = "SELECT * FROM " + TransazioneDS.TABLE_NAME + " WHERE ID_Utente = ?";
+
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setInt(1, ID_utente);
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+					TransazioneBean bean = new TransazioneBean();
+					bean.setID_transazione(rs.getInt("ID_Transazione"));
+					bean.setID_gioco(rs.getInt("ID_Gioco"));
+					bean.setID_utente(ID_utente);
+					bean.setID_fatturazione(rs.getInt("ID_Fatturazione"));
+					bean.setData(rs.getDate("Data").toLocalDate());
+					
+					transazioni.add(bean);
+			}
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return transazioni;
+	}
 }

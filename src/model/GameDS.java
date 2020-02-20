@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
 
 import javax.sql.DataSource;
 
@@ -294,6 +293,95 @@ public class GameDS implements DataAccessModel<GameBean> {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1, "%" + title + "%");
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				GameBean bean = new GameBean();
+
+				bean.setCode(rs.getInt("ID_Gioco"));
+				bean.setTitle(rs.getString("Titolo"));
+				bean.setDescription(rs.getString("Descrizione"));
+				bean.setPrice(rs.getInt("Prezzo"));
+				bean.setImg(rs.getString("Immagine"));
+				bean.setSconto(rs.getInt("Sconto"));
+				bean.setSponsorID(rs.getInt("ID_Sponsor"));
+				bean.setGenere(rs.getString("Genere"));
+				bean.setApproved(rs.getBoolean("Approvato"));
+				bean.setUserID(rs.getInt("ID_Utente"));
+				bean.setIcon(rs.getString("Icon"));
+				bean.setValutazione(rs.getInt("Valutazione"));
+				games.add(bean);
+			}
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return games;
+	}
+
+	public Collection<GameBean> doRetrieveByDeveloper(int ID_Utente) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		Collection<GameBean> games = new ArrayList<GameBean>();
+
+		String selectSQL = "SELECT * FROM " + GameDS.TABLE_NAME + " WHERE ID_Utente = ?";
+
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setInt(1, ID_Utente);
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				GameBean bean = new GameBean();
+
+				bean.setCode(rs.getInt("ID_Gioco"));
+				bean.setTitle(rs.getString("Titolo"));
+				bean.setDescription(rs.getString("Descrizione"));
+				bean.setPrice(rs.getInt("Prezzo"));
+				bean.setImg(rs.getString("Immagine"));
+				bean.setSconto(rs.getInt("Sconto"));
+				bean.setSponsorID(rs.getInt("ID_Sponsor"));
+				bean.setGenere(rs.getString("Genere"));
+				bean.setApproved(rs.getBoolean("Approvato"));
+				bean.setUserID(ID_Utente);
+				bean.setIcon(rs.getString("Icon"));
+				bean.setValutazione(rs.getInt("Valutazione"));
+				games.add(bean);
+			}
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return games;
+	}
+	
+	public Collection<GameBean> doRetrieveAllPending() throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		Collection<GameBean> games = new ArrayList<GameBean>();
+
+		String selectSQL = "SELECT * FROM " + GameDS.TABLE_NAME + " WHERE Approvato = 0";
+
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
 
 			ResultSet rs = preparedStatement.executeQuery();
 

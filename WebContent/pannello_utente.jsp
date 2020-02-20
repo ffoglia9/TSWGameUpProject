@@ -21,14 +21,29 @@
    <%@ page import = "model.UserBean.tipoUtente" %>
    <%@ page import = "model.BillDS" %>
    <%@ page import = "model.BillBean" %>
+   <%@ page import = "model.TransazioneBean" %>
+   <%@ page import = "model.TransazioneDS" %>
+   <%@ page import = "model.GameDS" %>
+   <%@ page import = "model.GameBean" %>
+   <%@ page import = "java.util.ArrayList" %>
    <%@ page import = "javax.sql.DataSource" %>
    <% 
      UserBean uBean = (UserBean) request.getSession().getAttribute("userBean");
 	 DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
 	 BillDS bds = new BillDS(ds);
+	 GameDS gds = new GameDS(ds);
 	 BillBean lastBill = bds.doRetrieveByUserID(uBean.getUserID());
 	 tipoUtente userType = uBean.getUserType();
+	 
+	 // Transazioni relative all'utente
+	 TransazioneDS tds = new TransazioneDS(ds);
+	 ArrayList<TransazioneBean> transazioni = (ArrayList<TransazioneBean>) tds.doRetrieveAllByUserID(uBean.getUserID());
+	 if(userType == tipoUtente.Developer) {
+		 // Lista giochi sviluppati dall'user
+		 ArrayList<GameBean> mieiGiochi = (ArrayList<GameBean>) gds.doRetrieveByDeveloper(uBean.getUserID());
+	 }
    %>
+   
 
 
 </head>
@@ -164,34 +179,42 @@
 		
 		<!-- Lista degli acquisti effettuati dall'utente -->
 		<div id="listaAcquisti" style="display: none">
-			LISTA ACQUISTI
-			CREARE UNA ENTRY TRANSAZIONE CONTENENTE ID UTENTE E ID GIOCO, QUANDO SI ACQUISTA UN GIOCO
-			FARE IL SELECT DI TUTTE LE TRANSAZIONI DELL'UTENTE UBEAN E PRINTARLE QUA
-			serve un formato html per ogni transazione
-			<div class="row">
-				<div class="col-md-12">
-                	<jsp:include page="transazione_card.jsp">
-              		<jsp:param name="ID" value="1"/>
-              		</jsp:include>
-                </div>
-                
-                <div class="col-md-12">
-                	<jsp:include page="transazione_card.jsp">
-              		<jsp:param name="ID" value="1"/>
-              		</jsp:include>
-                </div>
-                
+			
+			<%
+	        	TransazioneBean transazione;
+	        	while(transazioni.size() > 2) { transazione = transazioni.remove(0);
+	       	%>
+	       				<div class="row">
+				       	  <div class="col">
+				              <jsp:include page="transazione_card.jsp">
+				              	<jsp:param name="ID" value="<%= transazione.getID_transazione() %>"/>
+				              </jsp:include>
+				          </div>
+			          <% transazione = transazioni.remove(0); %>
+			          <div class="col">
+			              <jsp:include page="transazione_card.jsp">
+			              	<jsp:param name="ID" value="<%= transazione.getID_transazione() %>"/>
+			              </jsp:include>
+			          </div>
+	          		</div>
+	          <% } %>
+	          <% if(!transazioni.isEmpty()) { transazione = transazioni.remove(0); %>
+	          		<div class="row">
+	       	  <div class="col">
+	              <jsp:include page="transazione_card.jsp">
+	              	<jsp:param name="ID" value="<%= transazione.getID_transazione() %>"/>
+	              </jsp:include>
+	          </div>
+	          </div>
+	          <% } %>
+		
 				
 			</div>
 			
 			
 			
 			
-			
-			
-			
-			
-		</div>
+
 		
 		<%
           	if(userType == tipoUtente.Developer) {
@@ -327,24 +350,36 @@
 		<% } else if(userType == tipoUtente.Admin) { %>
 		<!-- Lista dei giochi proposti in attesa di approvazione -->
 		<div id="daApprovare" style="display: none">
-			BOOLEANO ACCETTATO SETTATO A FALSE PER LE PROPOSTE DI GIOCO
-			MESSO A VERO QUANDO L'ADMIN ACCETTA
 			
-			<div class="row">
-				<div class="col-md-12">
-                	<jsp:include page="app_pending.jsp">
-              		<jsp:param name="ID" value="1"/>
-              		</jsp:include>
-                </div>
-                
-                <div class="col-md-12">
-                	<jsp:include page="app_pending.jsp">
-              		<jsp:param name="ID" value="1"/>
-              		</jsp:include>
-                </div>
-                
-				
-			</div>
+			<%
+	        	GameBean gBean;
+				// Lista giochi pending
+				 ArrayList<GameBean> pendingGames = (ArrayList<GameBean>) gds.doRetrieveAllPending();
+	        	while(pendingGames.size() > 2) { gBean = pendingGames.remove(0);
+	       	%>
+	       				<div class="row">
+				       	  <div class="col">
+				              <jsp:include page="app_pending.jsp">
+				              	<jsp:param name="ID" value="<%= gBean.getCode() %>"/>
+				              </jsp:include>
+				          </div>
+			          <% gBean = pendingGames.remove(0); %>
+			          <div class="col">
+			              <jsp:include page="app_pending.jsp">
+			              	<jsp:param name="ID" value="<%= gBean.getCode() %>"/>
+			              </jsp:include>
+			          </div>
+	          		</div>
+	          <% } %>
+	          <% if(!pendingGames.isEmpty()) { gBean = pendingGames.remove(0); %>
+	          		<div class="row">
+	       	  <div class="col">
+	              <jsp:include page="app_pending.jsp">
+	              	<jsp:param name="ID" value="<%= gBean.getCode() %>"/>
+	              </jsp:include>
+	          </div>
+	          </div>
+	          <% } %>
 			
 			
 			
@@ -374,12 +409,11 @@
 			
 		</div>
 		<% } %>
-		
+		</div>
       </div>
     </div>
     <!-- /#page-content-wrapper -->
  
-  </div>
 
 
   <!-- /#wrapper -->
