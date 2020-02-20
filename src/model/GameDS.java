@@ -53,7 +53,6 @@ public class GameDS implements DataAccessModel<GameBean> {
 			int gameID = tableKeys.getInt(1);
 			game.setCode(gameID);
 
-			connection.commit();
 		} finally {
 			try {
 				if (preparedStatement != null)
@@ -164,7 +163,9 @@ public class GameDS implements DataAccessModel<GameBean> {
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
-			preparedStatement.setString(1, order);
+			if (order != null && !order.equals("")) {
+				preparedStatement.setString(1, order);
+			}
 
 			ResultSet rs = preparedStatement.executeQuery();
 
@@ -205,7 +206,7 @@ public class GameDS implements DataAccessModel<GameBean> {
 		PreparedStatement preparedStatement = null;
 		int result = 0;
 
-		String updateSQL = "UPDATE " + GameDS.TABLE_NAME + " SET Titolo = ?, Descrizione = ?, Immagine = ?, Prezzo = ?, ID_Sponsor = ?, Sconto = ?, Approvato = ?, Icon = ?, PendingSponsor = ?) WHERE ID_Gioco = ?";
+		String updateSQL = "UPDATE " + GameDS.TABLE_NAME + " SET Titolo = ?, Descrizione = ?, Immagine = ?, Prezzo = ?, ID_Sponsor = ?, Sconto = ?, Approvato = ?, Icon = ?, PendingSponsor = ? WHERE ID_Gioco = ?";
 
 		try {
 			connection = ds.getConnection();
@@ -225,7 +226,6 @@ public class GameDS implements DataAccessModel<GameBean> {
 
 			result = preparedStatement.executeUpdate();
 
-			connection.commit();
 		} finally {
 			try {
 				if (preparedStatement != null)
@@ -416,4 +416,48 @@ public class GameDS implements DataAccessModel<GameBean> {
 		return games;
 	}
 	
+	public Collection<GameBean> doRetrievePendingSponsors() throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		Collection<GameBean> games = new ArrayList<GameBean>();
+
+		String selectSQL = "SELECT * FROM " + GameDS.TABLE_NAME + " WHERE PendingSponsor = 1 AND ID_Sponsor != -1";
+
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				GameBean bean = new GameBean();
+
+				bean.setCode(rs.getInt("ID_Gioco"));
+				bean.setTitle(rs.getString("Titolo"));
+				bean.setDescription(rs.getString("Descrizione"));
+				bean.setPrice(rs.getInt("Prezzo"));
+				bean.setImg(rs.getString("Immagine"));
+				bean.setSconto(rs.getInt("Sconto"));
+				bean.setSponsorID(-1);
+				bean.setGenere(rs.getString("Genere"));
+				bean.setApproved(rs.getBoolean("Approvato"));
+				bean.setUserID(rs.getInt("ID_Utente"));
+				bean.setIcon(rs.getString("Icon"));
+				bean.setValutazione(rs.getInt("Valutazione"));
+				bean.setPendingSponsorReq(true);
+				games.add(bean);
+			}
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return games;
+	}
 }

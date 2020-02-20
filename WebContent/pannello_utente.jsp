@@ -387,23 +387,35 @@
 		
 		<!-- Lista dei giochi in attesa di sponsorizzazione -->
 		<div id="daSponsorizzare" style="display: none">
-			BOOLEANO ACCETTATO SETTATO A FALSE DI DEFAULT
-			MESSO A VERO QUANDO L'ADMIN ACCETTA LA SPONSORIZZAZIONE
-			<div class="row">
-				<div class="col-md-12">
-                	<jsp:include page="sponsor_card.jsp">
-              		<jsp:param name="ID" value="1"/>
-              		</jsp:include>
-                </div>
-                
-                <div class="col-md-12">
-                	<jsp:include page="sponsor_card.jsp">
-              		<jsp:param name="ID" value="1"/>
-              		</jsp:include>
-                </div>
-                
-				
-			</div>
+			<%
+	        	GameBean gBeanSponsor;
+				// Lista giochi pending
+				 ArrayList<GameBean> pendingSponsorGames = (ArrayList<GameBean>) gds.doRetrievePendingSponsors();
+	        	while(pendingSponsorGames.size() > 2) { gBeanSponsor = pendingSponsorGames.remove(0);
+	       	%>
+	       				<div class="row">
+				       	  <div class="col">
+				              <jsp:include page="sponsor_card.jsp">
+				              	<jsp:param name="ID" value="<%= gBeanSponsor.getCode() %>"/>
+				              </jsp:include>
+				          </div>
+			          <% gBeanSponsor = pendingSponsorGames.remove(0); %>
+			          <div class="col">
+			              <jsp:include page="sponsor_card.jsp">
+			              	<jsp:param name="ID" value="<%= gBeanSponsor.getCode() %>"/>
+			              </jsp:include>
+			          </div>
+	          		</div>
+	          <% } %>
+	          <% if(!pendingSponsorGames.isEmpty()) { gBeanSponsor = pendingSponsorGames.remove(0); %>
+	          		<div class="row">
+	       	  <div class="col">
+	              <jsp:include page="sponsor_card.jsp">
+	              	<jsp:param name="ID" value="<%= gBeanSponsor.getCode() %>"/>
+	              </jsp:include>
+	          </div>
+	          </div>
+	          <% } %>
 			
 			
 			

@@ -12,12 +12,13 @@ import javax.sql.DataSource;
 
 import model.GameBean;
 import model.GameDS;
+import model.SponsorizzazioneDS;
 
 /**
- * Servlet implementation class PendingGames
+ * Servlet implementation class PendingSponsor
  */
-@WebServlet("/PendingGames")
-public class PendingGames extends HttpServlet {
+@WebServlet("/PendingSponsor")
+public class PendingSponsor extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -26,17 +27,18 @@ public class PendingGames extends HttpServlet {
 		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
 		GameDS gameDS = new GameDS(ds);
 		try {
-			if(approvato == 1) {
-				GameBean gb = gameDS.doRetrieveByKey(ID_Gioco);
-				gb.setApproved(approvato == 1);
-				gameDS.doUpdate(gb);
-			} else {
-				gameDS.doDelete(ID_Gioco);
+			GameBean gb = gameDS.doRetrieveByKey(ID_Gioco);
+			gb.setPendingSponsorReq(false);
+			int sponsorID = gb.getSponsorID(); // ID della entry sponsor da cancellare manualmente
+			if(approvato == 0) {
+				gb.setSponsorID(-1);
+				SponsorizzazioneDS sds = new SponsorizzazioneDS(ds);
+				sds.doDelete(sponsorID);
 			}
+			gameDS.doUpdate(gb);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 	}
 
 }
