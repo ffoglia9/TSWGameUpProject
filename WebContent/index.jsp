@@ -128,7 +128,7 @@
         </div>
         <div class="col">
         <jsp:include page="product_card.jsp">
-              	<jsp:param name="ID" value="1"/>
+              	<jsp:param name="ID" value="2"/>
               </jsp:include>
 
         </div>
@@ -137,13 +137,13 @@
       <div class="row">
         <div class="col">
           <jsp:include page="product_card.jsp">
-              	<jsp:param name="ID" value="1"/>
+              	<jsp:param name="ID" value="3"/>
               </jsp:include>
 
         </div>
         <div class="col">
             <jsp:include page="product_card.jsp">
-              	<jsp:param name="ID" value="1"/>
+              	<jsp:param name="ID" value="4"/>
               </jsp:include>
 
         </div>

@@ -29,7 +29,7 @@ public class GameDS implements DataAccessModel<GameBean> {
 		PreparedStatement preparedStatement = null;
 		
 		String insertSQL = "INSERT INTO " + GameDS.TABLE_NAME + " (Titolo, Descrizione, Immagine, Prezzo, Sconto, Genere, ID_Utente, Approvato, Icon) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			connection = ds.getConnection();

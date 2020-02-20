@@ -20,7 +20,7 @@ import model.UserBean.tipoUtente;
 /**
  * Servlet Filter implementation class Auth
  */
-@WebFilter(urlPatterns = {"/checkout.jsp", "/pannello_utente.jsp", "/ModificaInfo", "/PendingGames"}) // Aggiungere pannello utente
+@WebFilter(urlPatterns = {"/checkout.jsp", "/pannello_utente.jsp", "/ModificaInfo", "/PendingGames", "/upload"}) // Aggiungere pannello utente
 public class Auth implements Filter {
 	HashMap<String, tipoUtente> permissionsMap;
     /**
@@ -32,6 +32,7 @@ public class Auth implements Filter {
         permissionsMap.put("/pannello_utente.jsp", tipoUtente.User);
         permissionsMap.put("/ModificaInfo", tipoUtente.User);
         permissionsMap.put("/PendingGames", tipoUtente.Admin);
+        permissionsMap.put("/upload", tipoUtente.User);
     }
 
 	/**

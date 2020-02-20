@@ -86,7 +86,6 @@
 		                    <button class="btn btn-primary btn-sm"> <i class="fa fa-lg fa-thumbs-o-up"></i> Mi piace </button>
 		                    <button class="btn btn-primary btn-sm"> <i class="fa fa-lg  fa-thumbs-o-down"></i> Non mi piace </button>
 		                    <!-- TODO aggiungere al button la chiamata ad un metodo che setta il campo liked (ReviewBean) su T/F  -->
-		
 		                </div>
 		            </div>
 
@@ -152,7 +151,6 @@
 			    		console.log("TEST2");
 			    		$.post("CartManager", 
 			    				{ID: <%= gb.getCode() %>},
-			    				async: false,
 			    				function(data) {
 			    					$("#errorLogin").text(data);
 			    				}
